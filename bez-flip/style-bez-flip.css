@@ -1,0 +1,104 @@
+* {
+	margin: 0;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, arial, sans-serif;
+  font-size: 13px;
+  line-height: 20px;
+  color: #444444;
+  background-color: #e5e5e5;
+}
+
+#wrapper {
+	width: 1000px;
+	margin: auto;
+}
+
+header {
+	height: 100px;
+}
+
+.card {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin: 10px 0 20px 0;
+  background-color: #ffffff;
+  border: 1px solid #d8d8d8;
+  border-top-width: 0;
+  border-bottom-width: 2px;
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
+  -webkit-box-shadow: none;
+     -moz-box-shadow: none;
+          box-shadow: none;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.card-map {
+	padding-top: 0;
+}
+
+.card .card-heading {
+  padding: 0 20px;
+  margin: 0;
+}
+
+.card .card-heading.simple {
+  font-size: 20px;
+  font-weight: 300;
+  color: #777;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.card .card-body {
+  padding: 0 20px;
+  margin-top: 20px;
+}
+
+.card .bottom {
+  padding: 0 20px;
+  margin-bottom: 17px;
+}
+
+#search-form {
+	float: left;
+	width: 295px;
+}
+
+.row {
+	min-height: 25px;
+	width: 100%;
+}
+
+.input {
+	float: right;
+	border: 1px solid #e5e5e5;
+}
+
+.ui-autocomplete {
+  max-height: 100px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+* html .ui-autocomplete {
+  height: 100px;
+}
+
+#map-display {
+	float: right;
+	width: 680px;
+	height: 400px;
+}
+
+#map-canvas {
+	width: 680px;
+	height: 400px;
+	margin: 0px;
+	padding: 0px;
+}

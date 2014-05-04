@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>jQuery UI Autocomplete - Custom data and display</title>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+	<link rel="stylesheet" href="/resources/demos/style.css">
+	<style>
+	html, body, #map-canvas {
+		height: 100%;
+		margin: 0px;
+		padding: 0px
+	}
+	#project-label {
+		display: block;
+		font-weight: bold;
+		margin-bottom: 1em;
+	}
+	#project-icon {
+		float: left;
+		height: 32px;
+		width: 32px;
+	}
+	#project-description {
+		margin: 0;
+		padding: 0;
+	}
+	</style>
+	<script>
+	$(function() {
+		var projects = [
+		{
+			label: "Alabama",
+			lat: 32.806673,
+			lon: -86.791133
+		},
+		{
+			label: "Alaska",
+			lat: 61.370717,
+			lon: -152.404420
+		}
+		];
+
+		$( "#project" ).autocomplete({
+			minLength: 0,
+			source: projects,
+			focus: function( event, ui ) {
+				$( "#project" ).val( ui.item.label );
+				return false;
+			},
+			select: function( event, ui ) {
+				$( "#project" ).val( ui.item.label );
+				$( "#project-id" ).val( ui.item.lat );
+				chicago = new google.maps.LatLng(ui.item.lat, ui.item.lon);
+				initialize();
+
+				return false;
+			}
+		})
+		.data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+			return $( "<li>" )
+			.append( "<a>" + item.label + "</a>" )
+			.appendTo( ul );
+		};
+	});
+	</script>
+	<script>
+	/** @constructor */
+	function CoordMapType(tileSize) {
+		this.tileSize = tileSize;
+	}
+
+	CoordMapType.prototype.getTile = function(coord, zoom, ownerDocument) {
+		var div = ownerDocument.createElement('div');
+		div.innerHTML = coord;
+		div.style.width = this.tileSize.width + 'px';
+		div.style.height = this.tileSize.height + 'px';
+		div.style.fontSize = '10';
+		div.style.borderStyle = 'solid';
+		div.style.borderWidth = '1px';
+		div.style.borderColor = '#AAAAAA';
+		return div;
+	};
+
+	var map;
+	var chicago = new google.maps.LatLng(41.850033,-87.6500523);
+
+	function initialize() {
+		var mapOptions = {
+			zoom: 7,
+			center: chicago
+		};
+		map = new google.maps.Map(document.getElementById('map-canvas'),
+			mapOptions);
+
+  // Insert this overlay map type as the first overlay map type at
+  // position 0. Note that all overlay map types appear on top of
+  // their parent base map.
+  map.overlayMapTypes.insertAt(
+  	0, new CoordMapType(new google.maps.Size(256, 256)));
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+</script>
+</head>
+<body>
+
+	<input id="project">
+	<input type="hidden" id="project-id">
+
+	<div id="map-canvas"></div>
+</body>
+</html>

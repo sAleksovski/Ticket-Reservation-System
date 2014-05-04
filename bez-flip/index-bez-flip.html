@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Ticket</title>
+		<link rel="stylesheet" type="text/css" href="style-bez-flip.css">
+		<link rel="stylesheet" href="jquery-ui.css">
+		<link rel="stylesheet" href="jquery-ui.custom.css">
+		<script src="jquery-1.10.2.js"></script>
+		<script src="jquery-ui.js"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+		<script type="text/javascript" src="stateCoor.js"></script>
+		<script type="text/javascript" src="script-bez-flip.js"></script>
+		</script>
+		<!-- 
+						TO-DO
+						1. autocomplete theme
+						2. scrollable autocomplete
+						3. header
+						4. ?
+		-->
+	</head>
+	<body>
+		<div id="wrapper">
+			<header class="card">
+				<center style="margin-top: 20px;"><p style="font-size: 32px;">CREATE ME</p></center>
+			</header>
+			
+			<div id="main">
+				<div id="search-form" class="card">
+					<h3 class="card-heading simple">Flight</h3>
+					<div class="card-body">
+					  <form>
+						  <div class="row">
+						  	<span class="left">From</span>
+						  	<input type="text" class="input" id="from" />
+						  </div>
+						  <div class="row">
+						  	<span class="left">To</span>
+						  	<input type="text" class="input" id="to" />
+						  </div>
+						  <div class="row">
+						  	<span class="left">Date</span>
+						  	<input type="text" class="input" id="date" />
+						  </div>
+						  <div class="row">
+						  	<span class="left">Seats</span>
+						  	<input type="text" class="input" id="seats" />
+						  </div>
+						  <div class="row">
+						  	<span class="left">Flip</span>
+						  </div>
+						</form>
+					</div>
+				</div> <!-- search-form end -->
+
+				<div id="map-display" class="card card-map">
+					<div id="map-canvas"></div>
+				</div> <!-- map-display end -->
+
+			</div> <!-- main end -->
+
+		</div>
+	</body>
+</html>

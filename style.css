@@ -1,0 +1,195 @@
+* {
+	margin: 0;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, arial, sans-serif;
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 20px;
+  color: #444444;
+  background-color: #e5e5e5;
+}
+
+#wrapper {
+	width: 1000px;
+	margin: auto;
+}
+
+header {
+	height: 100px;
+}
+
+.card {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin: 10px 0 20px 0;
+  background-color: #ffffff;
+  border: 1px solid #d8d8d8;
+  border-top-width: 0;
+  border-bottom-width: 2px;
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
+  -webkit-box-shadow: none;
+     -moz-box-shadow: none;
+          box-shadow: none;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.card-map {
+	padding-top: 0;
+}
+
+.card .card-heading {
+  padding: 0 20px;
+  margin: 0;
+}
+
+.card .card-heading.simple {
+  font-size: 20px;
+  font-weight: 300;
+  color: #777;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.card .card-body {
+  padding: 0 20px;
+  margin-top: 20px;
+}
+
+.card .bottom {
+  padding: 0 20px;
+  margin-bottom: 17px;
+}
+
+#search-form {
+	float: left;
+	width: 295px;
+}
+
+.row {
+	min-height: 25px;
+	width: 100%;
+}
+
+.input {
+	float: right;
+	border: 1px solid #e5e5e5;
+}
+
+.input:focus {
+	box-shadow: 0 0 5px #e5e5e5;
+	border: 1px solid #e5e5e5;
+}
+
+.ui-autocomplete {
+	max-height: 100px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+* html .ui-autocomplete {
+	height: 100px;
+}
+
+#map-display {
+	float: right;
+	width: 680px;
+	height: 400px;
+}
+
+#map-canvas {
+	width: 680px;
+	height: 400px;
+	margin: 0px;
+	padding: 0px;
+}
+
+/* Flip */
+
+.flip-container { 
+	float: right;
+	width: 680px;
+	height: 400px;
+	padding-top: 0px;
+	position: relative;
+	margin: 10px auto 40px;
+	-webkit-perspective: 800px;
+	 -moz-perspective: 800px;
+	   -o-perspective: 800px;
+	      perspective: 800px;
+}
+
+#flip-card {
+	width: 680px;
+	height: 400px;
+	position: absolute;
+	-webkit-transition: -webkit-transform 1s;
+	 -moz-transition: -moz-transform 1s;
+	   -o-transition: -o-transform 1s;
+	      transition: transform 1s;
+	-webkit-transform-style: preserve-3d;
+	 -moz-transform-style: preserve-3d;
+	   -o-transform-style: preserve-3d;
+	      transform-style: preserve-3d;
+	-webkit-transform-origin: right center;
+	 -moz-transform-origin: right center;
+	   -o-transform-origin: right center;
+	      transform-origin: right center;
+}
+
+#flip-card figure {
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	-webkit-backface-visibility: hidden;
+	 -moz-backface-visibility: hidden;
+	   -o-backface-visibility: hidden;
+	      backface-visibility: hidden;
+}
+
+#flip-card .front .card {
+	margin-top: 0;
+	height: 100%;
+	width: 100%;
+}
+
+#flip-card .back {
+	background-color: #B3D1FF;
+	  -webkit-transform: rotateY( 180deg );
+	     -moz-transform: rotateY( 180deg );
+	       -o-transform: rotateY( 180deg );
+	          transform: rotateY( 180deg );
+}
+
+#flip-card.flipped {
+    -webkit-transform: translateX( -100% ) rotateY( -180deg );
+     -moz-transform: translateX( -100% ) rotateY( -180deg );
+       -o-transform: translateX( -100% ) rotateY( -180deg );
+          transform: translateX( -100% ) rotateY( -180deg );
+}
+
+.ad-card-text {
+	height: 50px;
+	background-color: #ffffff;
+	opacity: 0.8;
+	padding: 20px;
+	border-radius: 5px;
+	margin-top: -90px;
+}
+
+.ad-card-text h3 {
+	font-size: 24px;
+	font-weight: normal;
+	opacity: 1.0;
+}
+
+.ad-card-text-red {
+	margin-top: 15px;
+	font-size: 24px;
+	color: red;
+}
