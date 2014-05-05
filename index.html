@@ -3,9 +3,9 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Ticket</title>
-		<link rel="stylesheet" type="text/css" href="style.css">
 		<link rel="stylesheet" href="jquery-ui.css">
 		<link rel="stylesheet" href="jquery-ui.custom.css"> <!-- tema za autocomplete, datepicker... -->
+		<link rel="stylesheet" type="text/css" href="style.css">
 		<script src="jquery-1.10.2.js"></script>
 		<script src="jquery-ui.js"></script>
 		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
@@ -29,61 +29,63 @@
 					<h3 class="card-heading simple">Book a Flight</h3>
 					<div class="card-body">
 					  <div id="tabs">
-					  	<ul>
+					  	<ul class="nav nav-tabs	">
 					  		<li><a href="#tabs-1">One way</a></li>
 					  		<li><a href="#tabs-2">Roundtrip</a></li>
 					  	</ul>
-					  	<div id="tabs-1">
-					  		<form>
-							  <div class="row">
-							  	<span class="left">From</span>
-							  	<input type="text" class="input" id="from" />
-							  </div>
-							  <div class="row">
-							  	<span class="left">To</span>
-							  	<input type="text" class="input" id="to" />
-							  </div>
-							  <div class="row">
-							  	<span class="left">Depart</span>
-							  	<input type="text" class="input" id="date" />
-							  </div>
-							  <div class="row">
-							  	<span class="left">Seats</span>
-							  	<select class="input" id="seats">
-							  		<option value="1">1</option>
-							  		<option value="2">2</option>
-							  	</select>
-							  </div>
-							</form>
-							<p><button id="flip">Flip Card</button></p>
-					  	</div>
-					  	<div id="tabs-2">
-					  		<form>
-							  <div class="row">
-							  	<span class="left">From</span>
-							  	<input type="text" class="input" id="from" />
-							  </div>
-							  <div class="row">
-							  	<span class="left">To</span>
-							  	<input type="text" class="input" id="to" />
-							  </div>
-							  <div class="row">
-							  	<span class="left">Depart</span>
-							  	<input type="text" class="input" id="date-depart" />
-							  </div>
-							  <div class="row">
-							  	<span class="left">Return</span>
-							  	<input type="text" class="input" id="date-return" />
-							  </div>
-							  <div class="row">
-							  	<span class="left">Seats</span>
-							  	<select class="input" id="seats">
-							  		<option value="1">1</option>
-							  		<option value="2">2</option>
-							  	</select>
-							  </div>
-							</form>
-					  	</div>
+					  	<div class="tab-content">
+						  	<div id="tabs-1" class="tab-pane">
+						  		<form>
+								  <div class="row">
+								  	<span class="left">From</span>
+								  	<input type="text" class="input" id="from" />
+								  </div>
+								  <div class="row">
+								  	<span class="left">To</span>
+								  	<input type="text" class="input" id="to" />
+								  </div>
+								  <div class="row">
+								  	<span class="left">Depart</span>
+								  	<input type="text" class="input" id="date" />
+								  </div>
+								  <div class="row">
+								  	<span class="left">Seats</span>
+								  	<select class="input" id="seats">
+								  		<option value="1">1</option>
+								  		<option value="2">2</option>
+								  	</select>
+								  </div>
+								</form>
+								<p><button id="flip">Flip Card</button></p>
+						  	</div>
+						  	<div id="tabs-2" class="tab-pane">
+						  		<form>
+								  <div class="row">
+								  	<span class="left">From</span>
+								  	<input type="text" class="input" id="from" />
+								  </div>
+								  <div class="row">
+								  	<span class="left">To</span>
+								  	<input type="text" class="input" id="to" />
+								  </div>
+								  <div class="row">
+								  	<span class="left">Depart</span>
+								  	<input type="text" class="input" id="date-depart" />
+								  </div>
+								  <div class="row">
+								  	<span class="left">Return</span>
+								  	<input type="text" class="input" id="date-return" />
+								  </div>
+								  <div class="row">
+								  	<span class="left">Seats</span>
+								  	<select class="input" id="seats">
+								  		<option value="1">1</option>
+								  		<option value="2">2</option>
+								  	</select>
+								  </div>
+								</form>
+						  	</div>
+						  </div>
 					  </div>
 					  
 					</div>
