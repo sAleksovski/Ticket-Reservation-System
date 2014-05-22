@@ -204,27 +204,7 @@ header {
     top: 0px; 
     margin: 0em;
 }
-/*
-#tabs .ui-state-default {
-	border: 0px;
-	background: white;
-}
 
-#tabs .ui-state-default :hover {
-	border: 0px;
-	border-bottom: 3px solid green;
-}
-
-#tabs .ui-tabs-nav li.ui-state-active {
-	border-bottom: 3px solid red !important;
-	padding: 3px;
-}
-
-#tabs .ui-tabs-nav li.ui-state-active a {
-	font-weight: bolder;
-	padding: 3px;
-}
-*/
 /* Tabs ----------------------------------*/
 .ui-tabs {
 
@@ -233,11 +213,10 @@ header {
 
 }
 .ui-tabs .ui-tabs-nav {
-
 	list-style: none;
 	position: relative;
 	padding: .2em .2em 0;
-
+	border-width: 0;
 }
 .ui-tabs .ui-tabs-nav li {
 	position: relative;
@@ -277,4 +256,18 @@ elsewhere... */
 }
 .ui-tabs .ui-tabs-hide {
 	display: none !important;
+}
+
+#book-tabs .ui-state-default {
+	border: 0px;
+	background: none;
+	border-bottom: 3px solid transparent !important;
+}
+
+#book-tabs .ui-state-hover {
+	border-bottom: 3px solid #4d90fe !important;
+}
+
+#book-tabs .ui-state-active {
+	border-bottom: 3px solid #427fed !important;
 }
