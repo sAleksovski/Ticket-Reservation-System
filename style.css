@@ -18,7 +18,12 @@ body {
 }
 
 header {
-	height: 100px;
+	height: 140px;
+	
+}
+
+#logo {
+	background-color: #36548B;
 }
 
 .card {
