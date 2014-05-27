@@ -12,7 +12,7 @@
 			$(document).ready(function (){
 				$.ajax({
 		            type:"GET",
-		            url: "http://query.yahooapis.com/v1/public/yql",
+		            url: "https://query.yahooapis.com/v1/public/yql",
 		            dataType: "jsonp",
 					data: {
 						q: "USE 'http://drunky.noip.me/KI/tmp.txt' AS remote; SELECT * FROM remote WHERE url='https://api.ba.com/rest-v1/v1/flightOfferBasic;departureCity=LON;arrivalCity=NYC;cabin=economy;journeyType=oneWay;range=monthLow.json'",
