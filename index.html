@@ -3,24 +3,18 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Aviato - Airline Tickets</title>
-		<link rel="stylesheet" href="jquery-ui.custom.css"> <!-- tema za autocomplete, datepicker... -->
-		<link rel="stylesheet" type="text/css" href="style.css">
-		<script src="jquery-1.10.2.js"></script>
-		<script src="jquery-ui.js"></script>
-		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-		<script type="text/javascript" src="stateCoor.js"></script>
-		<script type="text/javascript" src="script.js"></script>
-		<!-- 
-				TO-DO
-				1. autocomplete theme, good?
-				2. header
-				3. ?
-		-->
+		<link rel="stylesheet" href="css/jquery-ui.custom.css">
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<script src="js/jquery-1.10.2.js"></script>
+		<script src="js/jquery-ui.js"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
+		<script type="text/javascript" src="js/stateCoor.js"></script>
+		<script type="text/javascript" src="js/script.js"></script>
 	</head>
 	<body>
 		<div id="wrapper">
 			<header class="card" id="logo">
-				<center> <img style="height: 100px;" src="images/logo.png"></center>
+				<img src="images/logo.png" alt="The Aviato Logo" />
 			</header>
 			
 			<div id="main">
@@ -29,11 +23,11 @@
 					<div class="card-body">
 					  <div id="tabs">
 					  	<ul class="nav nav-tabs" id="book-tabs">
-					  		<li><a href="#tabs-1">One way</a></li>
-					  		<li><a href="#tabs-2">Roundtrip</a></li>
+					  		<li><a href="#tabs-one-way">One way</a></li>
+					  		<li><a href="#tabs-roundtrip">Roundtrip</a></li>
 					  	</ul>
 					  	<div class="tab-content">
-						  	<div id="tabs-1" class="tab-pane">
+						  	<div id="tabs-one-way" class="tab-pane">
 						  		<form>
 								  <div class="row">
 								  	<span class="left">From</span>
@@ -57,27 +51,27 @@
 								</form>
 								<p><button id="flip">Flip Card</button></p>
 						  	</div>
-						  	<div id="tabs-2" class="tab-pane">
+						  	<div id="tabs-roundtrip" class="tab-pane">
 						  		<form>
 								  <div class="row">
 								  	<span class="left">From</span>
-								  	<input type="text" class="input" id="from" />
+								  	<input type="text" class="input" id="from-r" />
 								  </div>
 								  <div class="row">
 								  	<span class="left">To</span>
-								  	<input type="text" class="input" id="to" />
+								  	<input type="text" class="input" id="to-r" />
 								  </div>
 								  <div class="row">
 								  	<span class="left">Depart</span>
-								  	<input type="text" class="input" id="date-depart" />
+								  	<input type="text" class="input" id="date-depart-r" />
 								  </div>
 								  <div class="row">
 								  	<span class="left">Return</span>
-								  	<input type="text" class="input" id="date-return" />
+								  	<input type="text" class="input" id="date-return-r" />
 								  </div>
 								  <div class="row">
 								  	<span class="left">Seats</span>
-								  	<select class="input" id="seats">
+								  	<select class="input" id="seats-r">
 								  		<option value="1">1</option>
 								  		<option value="2">2</option>
 								  	</select>
@@ -94,11 +88,11 @@
 					<div id="flip-card">
 						<figure class="front">
 							<div class="card">
-								<h3 class="card-heading simple">This is a place for ads.</h3>
+								<div class="card-heading simple">This is a place for ads.</div>
 								<div class="card-body">
-									<img src="images/plane.png" />
+									<img src="images/plane.png" alt="Image of a plane" />
 									<div class="ad-card-text">
-										<h3>Book your winter adventure now!</h3>
+										<div>Book your winter adventure now!</div>
 										<div class="ad-card-text-red">SKIING</div>
 									</div>
 								</div>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<table xmlns="http://query.yahooapis.com/v1/schema/table.xsd">
+  <meta>
+    <sampleQuery>select * from {table} where url="blogid.blogger.com/feeds/posts/default?alt=rss" and authorization="something"</sampleQuery>
+  </meta>
+  <bindings>
+  <select itemPath="" produces="XML">
+    <urls>
+      <url></url>
+    </urls>
+    <inputs>
+      <key id="url" type="xs:string" paramType="variable" required="true" />
+      <key id="authorization" type="xs:string" paramType="variable" required="false" />
+    </inputs>
+      <execute><![CDATA[
+      var req = y.rest(url);
+      req.header("Client-Key", "sq7tdca9g37ux3dcz5va3wq8");
+      response.object = req.get().response;
+      ]]></execute>
+    </select>
+  </bindings>
+</table>

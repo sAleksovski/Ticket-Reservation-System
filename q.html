@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Q</title>
+		<link rel="stylesheet" href="jquery-ui.custom.css"> <!-- tema za autocomplete, datepicker... -->
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<script src="jquery-1.10.2.js"></script>
+		<script src="jquery-ui.js"></script>
+		<script type="text/javascript">
+			var qu = "https://api.ba.com/rest-v1/v1/flightOfferBasic;departureCity=LON;arrivalCity=NYC;cabin=economy;journeyType=oneWay;range=monthLow.json";
+			$(document).ready(function (){
+				$.ajax({
+		            type:"GET",
+		            url: "http://query.yahooapis.com/v1/public/yql",
+		            dataType: "jsonp",
+					data: {
+						q: "USE 'http://drunky.noip.me/KI/tmp.txt' AS remote; SELECT * FROM remote WHERE url='https://api.ba.com/rest-v1/v1/flightOfferBasic;departureCity=LON;arrivalCity=NYC;cabin=economy;journeyType=oneWay;range=monthLow.json'",
+						format: "json"
+					},
+		            success: function(data) {
+		                $("#wrapper").append(data.query.results.PricedItinerariesResponse.PricedItinerary[0].DepartureCity);
+		            }
+			    });
+			});
+		</script>
+	</head>
+	<body>
+		<div id="wrapper">
+			
+		</div>
+	</body>
+</html>
