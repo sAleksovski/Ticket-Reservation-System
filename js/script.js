@@ -35,18 +35,32 @@ function initialize() {
     					if (markerFrom == null) {
 	    					markerFrom = new google.maps.Marker({
        						 	position: event.latLng, 
-        						map: map
+        						map: map,
+        						title: "Click to remove"
     						});
 							$("#from").val(results[1].address_components[results[1].address_components.length - 2].long_name);
+
+							google.maps.event.addListener(markerFrom, 'click', function() {
+								removeMarker(markerFrom);
+							});
+
+							if (markerTo != null) {
+								drawPath();
+							};
 						}
 
 						// Fill #to field and draw  path
 						else if (markerTo == null) {
 	    					markerTo = new google.maps.Marker({
        						 	position: event.latLng, 
-        						map: map
+        						map: map,
+        						title: "Click to remove"
     						});
 							$("#to").val(results[1].address_components[results[1].address_components.length - 2].long_name);
+
+							google.maps.event.addListener(markerTo, 'click', function() {
+								removeMarker(markerTo);
+							});
 
 							if (markerFrom != null) {
 								drawPath();
@@ -130,10 +144,10 @@ $(function() {
 				position: myLatlng,
 				map: map,
 				//icon: image,
-				title: ui.item.label
+				title: "Click to remove"
 			});
 			google.maps.event.addListener(markerFrom, 'click', function() {
-				$("#from_click").html(markerFrom.title);
+				removeMarker(markerFrom);
 			});
 
 			if (markerTo != null) {
@@ -167,11 +181,11 @@ $(function() {
 				position: myLatlng,
 				map: map,
 				//icon: image,
-				title: ui.item.label
+				title: "Click to remove"
 			});
 
 			google.maps.event.addListener(markerTo, 'click', function() {
-				$("#to_click").html(markerTo.title);
+				removeMarker(markerTo);
 			});
 			//initialize();
 
@@ -214,7 +228,8 @@ $(function() {
 	});
 
 	$("#to").focusout(function() {
-		if ($("#from").val().trim().length == 0 && $("#to").val().trim().length == 0 &&  ! $("#from").is(":hover") ) {
+		if ($("#from").val().trim().length == 0 && $("#to").val().trim().length == 0 &&  ! $("#from").is(":hover")
+			&& ! $("#flip-card").is(":hover") ) {
 			//$("#flip-card").removeClass('flipped');
 			flip(false);
 		};
@@ -232,6 +247,20 @@ function contains (target) {
     		};
 	})
 	return res;
+}
+
+// remove marker from map and set null the marker
+function removeMarker (marker) {
+	marker.setMap(null);
+	flightPath.setMap(null);
+	if(marker == markerFrom) {
+		$("#from").val("");
+		markerFrom = null;
+	}
+	else if(marker == markerTo) {
+		$("#to").val("");
+		markerTo = null;
+	}
 }
 
 function flip (addClass) {
