@@ -199,7 +199,7 @@ $(function() {
 
 	$("#date").datepicker({ minDate: 0, maxDate: "+1Y" });
 	$("#tabs").tabs();
-
+	$("#results-table").tablesorter();
 });
 
 function contains (target) {
