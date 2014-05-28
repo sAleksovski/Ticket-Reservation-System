@@ -5,12 +5,15 @@
 		<title>Aviato - Airline Tickets</title>
 		<link rel="stylesheet" href="css/jquery-ui.custom.css">
 		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 		<script src="js/jquery-1.10.2.js"></script>
 		<script src="js/jquery-ui.js"></script>
 		<script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
 		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
 		<script type="text/javascript" src="js/stateCoor.js"></script>
+		<script type="text/javascript" src="js/jquery-scrollTo.js"></script>
 		<script type="text/javascript" src="js/script.js"></script>
+
 	</head>
 	<body>
 		<div id="wrapper">
@@ -24,8 +27,8 @@
 					<div class="card-body">
 					  <div id="tabs">
 					  	<ul class="nav nav-tabs" id="book-tabs">
-					  		<li><a href="#tabs-one-way">One way</a></li>
-					  		<li><a href="#tabs-roundtrip">Roundtrip</a></li>
+					  		<li id="link-first-tab"><a href="#tabs-one-way">One way</a></li>
+					  		<li id="link-second-tab" ><a href="#tabs-one-way">Roundtrip</a></li>
 					  	</ul>
 					  	<div class="tab-content">
 						  	<div id="tabs-one-way" class="tab-pane">
@@ -41,6 +44,10 @@
 								  <div class="row">
 								  	<span class="left">Depart</span>
 								  	<input type="text" class="input" id="date" />
+								  </div>
+								  <div class="row" id="date-return-div">
+								  	<span class="left">Return</span>
+								  	<input type="text" class="input" id="date-return" />
 								  </div>
 								  <div class="row">
 								  	<span class="left">Class</span>
@@ -58,8 +65,9 @@
 								  	</select>
 								  </div>
 								</form>
+								<button id="button-search">Search</button>
 						  	</div>
-						  	<div id="tabs-roundtrip" class="tab-pane">
+						  	<!--<div id="tabs-roundtrip" class="tab-pane">
 						  		<form>
 								  <div class="row">
 								  	<span class="left">From</span>
@@ -93,7 +101,7 @@
 								  	</select>
 								  </div>
 								</form>
-						  	</div>
+						  	</div> -->
 						  </div>
 					  </div>
 					  
@@ -162,7 +170,6 @@
 					</tbody>
 				</table>
 			</div> <!-- results end -->
-
 		</div>
 	</body>
 </html>

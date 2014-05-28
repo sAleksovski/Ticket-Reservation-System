@@ -96,6 +96,9 @@ google.maps.event.addDomListener(window, 'load', initialize);
 // MAPA KRAJ
 
 $(function() {
+	$("#date-return-div").hide();
+	$("#results").hide();
+
 	$( "#from" ).autocomplete({
 		minLength: 0,
 		source: stateCoor,
@@ -198,8 +201,24 @@ $(function() {
 	});
 
 	$("#date").datepicker({ minDate: 0, maxDate: "+1Y" });
+	$("#date-return").datepicker({ minDate: 0, maxDate: "+1Y" });
+
 	$("#tabs").tabs();
 	$("#results-table").tablesorter();
+
+	$( "#link-second-tab" ).click(function() {
+		$("#date-return-div").show();
+	});
+
+	$( "#link-first-tab" ).click(function() {
+		$("#date-return-div").hide();
+	});
+
+	$("#button-search").click(function() {
+		$("#results").toggle( "drop", 1000 );
+		//$('body').scrollTo('#results');
+	});
+
 });
 
 function contains (target) {
