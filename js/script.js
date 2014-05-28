@@ -203,20 +203,23 @@ $(function() {
 	$("#date").datepicker({ minDate: 0, maxDate: "+1Y" });
 	$("#date-return").datepicker({ minDate: 0, maxDate: "+1Y" });
 
-	$("#tabs").tabs();
 	$("#results-table").tablesorter();
 
 	$( "#link-second-tab" ).click(function() {
 		$("#date-return-div").show();
+		$("#link-first-tab").removeClass("ui-state-active");
+		$("#link-second-tab").addClass("ui-state-active");
 	});
 
 	$( "#link-first-tab" ).click(function() {
 		$("#date-return-div").hide();
+		$("#link-second-tab").removeClass("ui-state-active");
+		$("#link-first-tab").addClass("ui-state-active");
 	});
 
 	$("#button-search").click(function() {
 		$("#results").toggle( "drop", 1000 );
-		//$('body').scrollTo('#results');
+		$('body').scrollTo('#results');
 	});
 
 });

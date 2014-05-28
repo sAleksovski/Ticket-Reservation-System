@@ -204,78 +204,60 @@ header {
 	color: red;
 }
 
-#tabs .ui-tabs-nav { 
+/* Tabs ----------------------------------*/
+#tabs ul { 
     height: 2.35em; 
     text-align: center; 
+    list-style: none;
+	position: relative;
+	padding: .2em .2em 0;
+	border-width: 0;
 } 
-#tabs .ui-tabs-nav li { 
+#tabs ul li { 
     display: inline-block; 
     float: none; 
     top: 0px; 
     margin: 0em;
+    position: relative;
+	padding: 0;
+	border: 0px;
+	background: none;
+	border-bottom: 3px solid transparent;
 }
-
-/* Tabs ----------------------------------*/
-.ui-tabs {
-
+#tabs {
 	padding: .2em;
 	zoom: 1;
-
 }
-.ui-tabs .ui-tabs-nav {
-	list-style: none;
-	position: relative;
-	padding: .2em .2em 0;
-	border-width: 0;
-}
-.ui-tabs .ui-tabs-nav li {
-	position: relative;
+#tabs ul li span {
 	float: left;
-	border-bottom-width: 0 !important;
-	margin: 0 .2em -1px 0;
-	padding: 0;
-}
-.ui-tabs .ui-tabs-nav li a {
-	float: left;
+	font-weight: bold;
+	font-size: 12px;
 	text-decoration: none;
 	padding: .5em 1em;
+	color: #444444;
 }
-.ui-tabs .ui-tabs-nav li.ui-tabs-selected {
-	padding-bottom: 1px;
-	border-bottom-width: 0;
-}
-.ui-tabs .ui-tabs-nav li.ui-tabs-selected a, .ui-tabs .ui-tabs-nav li.ui-state-disabled a,
-.ui-tabs .ui-tabs-nav
-li.ui-state-processing a {
-	cursor:
-	text;
-}
-.ui-tabs .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible
-.ui-tabs-nav li.ui-tabs-selected a {
+#tabs ul li span:hover {
 	cursor: pointer;
+	cursor: hand;
 }
-.ui-tabs .ui-tabs-panel {
-	padding: 1em 1.4em;
+
+#tabs-content {
+	padding: 1.1em 1.6em;
 	display: block;
 	border-width: 0;
 	background: none;
 }
-.ui-tabs .ui-tabs-hide {
-	display: none !important;
+
+#tabs ul li:hover {
+	border-bottom: 3px solid #4d90fe;
 }
 
-#book-tabs .ui-state-default {
-	border: 0px;
-	background: none;
-	border-bottom: 3px solid transparent !important;
+#tabs ul .ui-state-active {
+	border-bottom: 3px solid #427fed;
 }
 
-#book-tabs .ui-state-hover {
-	border-bottom: 3px solid #4d90fe !important;
-}
-
-#book-tabs .ui-state-active {
-	border-bottom: 3px solid #427fed !important;
+.row span {
+	font-size: 1.1em;
 }
 
 #results {
