@@ -290,10 +290,36 @@ li.ui-state-processing a {
 }
 
 #results-table thead th {
+	background-image: url('../images/bg.png');
+	background-repeat:no-repeat;
+	background-position: right center;
 	text-align: left;
 	font-size: 20px;
 	padding: 10px 10px;
 	background-color: #36548B;
+	color: white;
+}
+
+#results-table th.headerSortDown {
+	background-image: url('../images/desc.png');
+	background-repeat:no-repeat;
+	background-position: right center;
+
+	text-align: left;
+	font-size: 20px;
+	padding: 10px 10px;
+	background-color: #302B54;
+	color: white;
+}
+
+#results-table th.headerSortUp {
+	background-image: url('../images/asc.png');
+	background-repeat:no-repeat;
+	background-position: right center;
+	text-align: left;
+	font-size: 20px;
+	padding: 10px 10px;
+	background-color: #302B54;
 	color: white;
 }
 
