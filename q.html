@@ -15,11 +15,17 @@
 		            url: "https://query.yahooapis.com/v1/public/yql",
 		            dataType: "jsonp",
 					data: {
-						q: "USE 'http://drunky.noip.me/KI/tmp.txt' AS remote; SELECT * FROM remote WHERE url='https://api.ba.com/rest-v1/v1/flightOfferBasic;departureCity=LON;arrivalCity=NYC;cabin=economy;journeyType=oneWay;range=monthLow.json'",
+						q: "USE 'http://drunky.noip.me/KI/tmp.txt' AS remote; SELECT * FROM remote WHERE url='https://api.ba.com/rest-v1/v1/flightOfferMktAffiliates;departureDateTimeOutbound=2014-05-28T00:00:00;locationCodeOriginOutbound=LHR;locationCodeDestinationOutbound=JFK;cabin=Economy;ADT=1;CHD=0;INF=0;format=.json'",
 						format: "json"
 					},
 		            success: function(data) {
-		                $("#wrapper").append(data.query.results.PricedItinerariesResponse.PricedItinerary[0].DepartureCity);
+		            	$.each(data.query.results.OTA_AirLowFareSearchRS.PricedItineraries.PricedItinerary, function(i){
+			            		$("#wrapper").append("<br />" + i);
+			            		$("#wrapper").append("<br />DepartureDateTime: " + data.query.results.OTA_AirLowFareSearchRS.PricedItineraries.PricedItinerary[i].AirItinerary.OriginDestinationOptions.OriginDestinationOption.FlightSegment._DepartureDateTime);
+				                $("#wrapper").append("<br />ArrivalDateTime: " + data.query.results.OTA_AirLowFareSearchRS.PricedItineraries.PricedItinerary[i].AirItinerary.OriginDestinationOptions.OriginDestinationOption.FlightSegment._ArrivalDateTime);
+				                $("#wrapper").append("<br />Airline: " + data.query.results.OTA_AirLowFareSearchRS.PricedItineraries.PricedItinerary[i].AirItinerary.OriginDestinationOptions.OriginDestinationOption.FlightSegment.OperatingAirline._CompanyShortName);
+				                $("#wrapper").append("<br />Price: " + data.query.results.OTA_AirLowFareSearchRS.PricedItineraries.PricedItinerary[i].AirItineraryPricingInfo.ItinTotalFare.TotalFare._Amount + " " + data.query.results.OTA_AirLowFareSearchRS.PricedItineraries.PricedItinerary[i].AirItineraryPricingInfo.ItinTotalFare.TotalFare._CurrencyCode);
+		            		});
 		            }
 			    });
 			});

@@ -18,8 +18,7 @@ body {
 }
 
 header {
-	height: 140px;
-	
+	height: 140px;	
 }
 
 #logo {
@@ -254,11 +253,7 @@ li.ui-state-processing a {
 .ui-tabs .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible
 .ui-tabs-nav li.ui-tabs-selected a {
 	cursor: pointer;
-} /* first selector
-in group seems obsolete, but required
-to overcome bug in Opera applying
-cursor: text overall if defined
-elsewhere... */
+}
 .ui-tabs .ui-tabs-panel {
 	padding: 1em 1.4em;
 	display: block;
@@ -281,4 +276,39 @@ elsewhere... */
 
 #book-tabs .ui-state-active {
 	border-bottom: 3px solid #427fed !important;
+}
+
+#results {
+	margin-top: 460px;
+	padding: 15px;
+}
+
+#results-table {
+	width: 100%;
+	border-collapse: separate;
+	border-spacing: 0px;
+}
+
+#results-table thead th {
+	text-align: left;
+	font-size: 20px;
+	padding: 10px 10px;
+	background-color: #36548B;
+	color: white;
+}
+
+#results-table thead th:first-child {
+    border-radius: 6px 0 0 0;
+}
+
+#results-table thead th:last-child {
+    border-radius: 0 6px 0 0;
+}
+
+#results-table tbody tr:hover {
+	background-color: #eee;
+}
+
+#results-table tbody tr td {
+	padding: 10px 10px;
 }

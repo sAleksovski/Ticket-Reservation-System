@@ -42,6 +42,14 @@
 								  	<input type="text" class="input" id="date" />
 								  </div>
 								  <div class="row">
+								  	<span class="left">Class</span>
+								  	<select class="input" id="class">
+								  		<option value="Economy">Economy</option>
+								  		<option value="Business">Business</option>
+								  		<option value="First">First</option>
+								  	</select>
+								  </div>
+								  <div class="row">
 								  	<span class="left">Seats</span>
 								  	<select class="input" id="seats">
 								  		<option value="1">1</option>
@@ -49,7 +57,6 @@
 								  	</select>
 								  </div>
 								</form>
-								<p><button id="flip">Flip Card</button></p>
 						  	</div>
 						  	<div id="tabs-roundtrip" class="tab-pane">
 						  		<form>
@@ -68,6 +75,14 @@
 								  <div class="row">
 								  	<span class="left">Return</span>
 								  	<input type="text" class="input" id="date-return-r" />
+								  </div>
+								  <div class="row">
+								  	<span class="left">Class</span>
+								  	<select class="input" id="class-r">
+								  		<option value="Economy">Economy</option>
+								  		<option value="Business">Business</option>
+								  		<option value="First">First</option>
+								  	</select>
 								  </div>
 								  <div class="row">
 								  	<span class="left">Seats</span>
@@ -104,9 +119,46 @@
 		  					</div>
 		  				</figure>
 					</div>
-				</div>
+				</div> <!-- map end -->
 
 			</div> <!-- main end -->
+
+			<div id="results" class="card">
+				<table id="results-table">
+					<thead>
+						<th>From</th>
+						<th>To</th>
+						<th>Date</th>
+						<th>Departure</th>
+						<th>Arrival</th>
+						<th>Class</th>
+						<th>Price</th>
+						<th>Book</th>
+					</thead>
+					<tbody>
+						<tr>
+							<td>California</td>
+							<td>Massachusetts</td>
+							<td>2014-05-29</td>
+							<td>12:30 PM</td>
+							<td>18:30 PM</td>
+							<td>Economy</td>
+							<td>130 USD</td>
+							<td>BOOK BUTTON?</td>
+						</tr>
+						<tr>
+							<td>New Orleans, Luisiana</td>
+							<td>Massachusetts</td>
+							<td>2014-05-29</td>
+							<td>12:30 PM</td>
+							<td>18:30 PM</td>
+							<td>Economy</td>
+							<td>130 USD</td>
+							<td>BOOK BUTTON?</td>
+						</tr>
+					</tbody>
+				</table>
+			</div> <!-- results end -->
 
 		</div>
 	</body>
