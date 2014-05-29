@@ -219,8 +219,6 @@ $(function() {
 		$("#link-first-tab").addClass("ui-state-active");
 	});
 
-	$()
-
 	$("#button-search").click(function() {
 		$("#results").toggle( "drop", 1000 );
 		$('body').scrollTo('#results');
