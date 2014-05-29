@@ -220,8 +220,11 @@ $(function() {
 	});
 
 	$("#button-search").click(function() {
-		$("#results").toggle( "drop", 1000 );
-		$('body').scrollTo('#results');
+		//$("#results").toggle( "drop", 1000 );
+		if (! $("#results").is(":visible") ) {
+			$("#results").slideToggle( "slow");
+			$('body').scrollTo('#results');
+		};
 	});
 
 	$(".city-block").click(function() {
