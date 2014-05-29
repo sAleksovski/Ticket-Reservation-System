@@ -99,6 +99,8 @@ $(function() {
 	$("#date-return-div").hide();
 	$("#results").hide();
 
+	var viewMoreOpen = false;
+
 	$( "#from" ).autocomplete({
 		minLength: 0,
 		source: stateCoor,
@@ -217,9 +219,37 @@ $(function() {
 		$("#link-first-tab").addClass("ui-state-active");
 	});
 
+	$()
+
 	$("#button-search").click(function() {
 		$("#results").toggle( "drop", 1000 );
 		$('body').scrollTo('#results');
+	});
+
+	$(".city-block").click(function() {
+		var string = $(this).find(".state-name").html();
+		string = string.substring(0, string.length - 5);
+		
+		// trigger autocomplete event
+		var keyEvent = $.Event("keydown");          
+		keyEvent.keyCode = $.ui.keyCode.DOWN;  // event for pressing "down" key
+		$("#to").val(string);
+		$("#to").trigger(keyEvent);  // Press "down" key twice to select first Item
+		$("#to").trigger(keyEvent);
+		keyEvent.keyCode = $.ui.keyCode.ENTER; // event for pressing the "enter" key
+		$("#to").trigger(keyEvent); 
+	});
+
+	$(".expand-city-guide").click(function() {
+		if(viewMoreOpen) {
+			$("#expand-city-div").find("div").addClass("hidden");
+			$(".expand-city-guide").html("Show more destionations");
+		}
+		else {
+			$("#expand-city-div").find("div").removeClass("hidden");
+			$(".expand-city-guide").html("Show less destionations");
+		}
+		viewMoreOpen = !viewMoreOpen;
 	});
 
 });
