@@ -96,6 +96,9 @@ google.maps.event.addDomListener(window, 'load', initialize);
 // MAPA KRAJ
 
 $(function() {
+	// firefox remember input on reload fix
+	$(".input").val("");
+
 	$("#date-return-div").hide();
 	$("#results").hide();
 
@@ -205,8 +208,6 @@ $(function() {
 	$("#date").datepicker({ minDate: 0, maxDate: "+1Y" });
 	$("#date-return").datepicker({ minDate: 0, maxDate: "+1Y" });
 
-	//$("#results-table").tablesorter();
-
 	$( "#link-second-tab" ).click(function() {
 		$("#date-return-div").show();
 		$("#link-first-tab").removeClass("ui-state-active");
@@ -223,10 +224,11 @@ $(function() {
 		search();
 		if (! $("#results").is(":visible") ) {
 			$("#results").slideToggle( "slow");
-			$("html,body").animate({
-			    scrollTop: $("#results").offset().top - 10
-			});
 		};
+
+		$("html,body").animate({
+			    scrollTop: $("#results").offset().top - 10
+		});
 	});
 
 	$(".city-block").click(function() {
@@ -293,7 +295,64 @@ function flip (addClass) {
 
 function search() {
 	$("#results").html("<div id=\"container\"><div class=\"stick\"></div><div class=\"stick\"></div><div class=\"stick\"></div><div class=\"stick\"></div><div class=\"stick\"></div><div class=\"stick\"></div><h1>Loading...</h1></div>");
-	var table = "<table id=\"results-table\"><thead><tr><th>From</th><th>To</th><th>Date</th><th>Departure</th><th>Arrival</th><th>Class</th><th>Price</th><th>Book</th></tr></thead><tbody><tr><td>California</td><td>Massachusetts</td><td>2014-05-29</td><td>12:30 PM</td><td>17:30 PM</td><td>Economy</td><td>130 USD</td><td>BOOK BUTTON?</td></tr><tr><td>New Orleans, Luisiana</td><td>Massachusetts</td><td>2014-05-29</td><td>12:30 PM</td><td>18:30 PM</td><td>Economy</td><td>140 USD</td><td>BOOK BUTTON?</td></tr></tbody></table>";
+	var table;
+	
+	var noFlight = (27 * generateRandom(0, 10)) % 10;
+	alert(noFlight);
+	if(noFlight >= (9 - parseInt($("#class").prop("selectedIndex")))) {
+		table = "<p>Sorry, no flights match your search terms.</p>"
+	}
+	else {
+		table = "<table id=\"results-table\"><thead><tr><th>From</th><th>To</th><th>Date Depart</th>" + (isEmpty($("#date-return").val()) ? "" :  "<th>Date Return</th>") +"<th>Departure</th><th>Arrival</th><th>Class</th><th>Price</th><th>Book</th></tr></thead><tbody>";
+		var n = generateRandom(3, 9);
+		for (var i = 0; i < n; i++) {
+			var hour = (generateRandom(0, 12) + 27 * i) % 12;
+			var min = (generateRandom(0, 60) + 27 * i) % 60;
+			min = Math.round(min / 5) * 5;
+			var timeFrom = (hour < 10 ? "0" : "") + hour + ":" + (min < 10 ? "0" : "") + min + " AM";
+			
+			hour = (generateRandom(0, 12) + 27 * (n - i)) % 12;
+			min = (generateRandom(0, 60) + 27 * (n - i)) % 60;
+			min = Math.round(min / 5) * 5;
+			var timeArr = (hour < 10 ? "0" : "") + hour + ":" + (min < 10 ? "0" : "") + min + " PM";
+
+			var price = generateRandom(200, 900) * (parseInt($( "#seats option:selected" ).text())/2.0 + 0.5);
+			price += price * ((generateRandom(0, 6) + 27 * i) % 5) / 10.0 
+			price += price * parseInt($("#class").prop("selectedIndex")) * 0.2;
+			price = Math.round(price);
+
+			var row = "<tr><td>" + $("#from").val() + "</td><td>" + $("#to").val() + "</td><td>"
+			+ $("#date").val() + "</td>" + (isEmpty($("#date-return").val()) ? "" : ("<td>" + $("#date-return").val() + "</td>")) + "<td>" + timeFrom + "</td><td>" + timeArr + "</td><td>" + "Economy"
+			+ "</td><td>" + "$ " + price +"</td><td>" + "BOOK BUTTON" + "</td></tr>";
+			table += row;
+		};
+		table += "</tbody></table>";
+	}
 	setTimeout(function(){$("#results").html(table)}, 2000);
-	setTimeout(function(){$("#results-table").tablesorter()}, 2100);
+	setTimeout(function(){$("#results-table").tablesorter({
+		textExtraction: function(node){ 
+            // for numbers formattted like $1,000.50 e.g. English
+            return $(node).text().replace(/[,$£€]/g,'');
+         }
+	})}, 2100);
+}
+
+function isEmpty(str) {
+    return (!str || 0 === str.length);
+}
+
+function generateRandom(from, to) {
+	var sum = 0;
+	for (var i = 0; i < $("#from").val().length; i++) {
+		sum += $("#from").val().charCodeAt(i);
+	};
+	for (var i = 0; i < $("#to").val().length; i++) {
+		sum += $("#to").val().charCodeAt(i);
+	};
+	var nums = $("#date").val().split('/');
+	for (var i = 0; i < nums.length; i++) {
+		sum += parseInt(nums[i]);
+	};
+
+	return sum % (to - from) + from;
 }
