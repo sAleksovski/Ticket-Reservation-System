@@ -220,10 +220,12 @@ $(function() {
 	});
 
 	$("#button-search").click(function() {
-		//$("#results").toggle( "drop", 1000 );
+		search();
 		if (! $("#results").is(":visible") ) {
 			$("#results").slideToggle( "slow");
-			$('body').scrollTo('#results');
+			$("html,body").animate({
+			    scrollTop: $("#results").offset().top - 10
+			});
 		};
 	});
 
@@ -287,4 +289,10 @@ function flip (addClass) {
 		$("#flip-card").removeClass('flipped');
 		setTimeout(function(){$(".ad-card-text").css("opacity", "0.8")}, 1000);
 	};
+}
+
+function search() {
+	$("#results").html("<div id=\"container\"><div class=\"stick\"></div><div class=\"stick\"></div><div class=\"stick\"></div><div class=\"stick\"></div><div class=\"stick\"></div><div class=\"stick\"></div><h1>Loading...</h1></div>");
+	var table = "<table id=\"results-table\"><thead><tr><th>From</th><th>To</th><th>Date</th><th>Departure</th><th>Arrival</th><th>Class</th><th>Price</th><th>Book</th></tr></thead><tbody><tr><td>California</td><td>Massachusetts</td><td>2014-05-29</td><td>12:30 PM</td><td>17:30 PM</td><td>Economy</td><td>130 USD</td><td>BOOK BUTTON?</td></tr><tr><td>New Orleans, Luisiana</td><td>Massachusetts</td><td>2014-05-29</td><td>12:30 PM</td><td>18:30 PM</td><td>Economy</td><td>140 USD</td><td>BOOK BUTTON?</td></tr></tbody></table>";
+	setTimeout(function(){$("#results").html(table)}, 2000);
 }
