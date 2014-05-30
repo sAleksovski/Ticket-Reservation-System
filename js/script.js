@@ -298,7 +298,7 @@ function search() {
 	var table;
 	
 	var noFlight = (27 * generateRandom(0, 10)) % 10;
-	alert(noFlight);
+
 	if(noFlight >= (9 - parseInt($("#class").prop("selectedIndex")))) {
 		table = "<p>Sorry, no flights match your search terms.</p>"
 	}
@@ -317,8 +317,9 @@ function search() {
 			var timeArr = (hour < 10 ? "0" : "") + hour + ":" + (min < 10 ? "0" : "") + min + " PM";
 
 			var price = generateRandom(200, 900) * (parseInt($( "#seats option:selected" ).text())/2.0 + 0.5);
-			price += price * ((generateRandom(0, 6) + 27 * i) % 5) / 10.0 
+			price += price * ((generateRandom(0, 51) + 277 * i) % 50) / 100.0 
 			price += price * parseInt($("#class").prop("selectedIndex")) * 0.2;
+			price += price * (isEmpty($("#date-return").val()) ? 0 : 0.7);
 			price = Math.round(price);
 
 			var row = "<tr><td>" + $("#from").val() + "</td><td>" + $("#to").val() + "</td><td>"
