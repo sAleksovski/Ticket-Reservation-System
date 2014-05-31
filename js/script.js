@@ -368,7 +368,8 @@ $(function() {
 		return false;
 	});
 
-	$("#msform-container").click(function(){
+	$("#msform-container").click(function(e){
+		if (e.target !== this) return;
 		$(this).addClass('hide');
 	});
 	/* Booking end */
