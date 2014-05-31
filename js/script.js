@@ -235,8 +235,7 @@ $(function() {
 	});
 
 	$("#button-search").click(function() {
-		var a = validate();
-		if (a) {
+		if (isInvalidForm()) {
 			return;
 		};
 		search();
@@ -331,18 +330,19 @@ function search() {
 			
 			hour = (generateRandom(0, 12) + 27 * (n - i)) % 12;
 			min = (generateRandom(0, 60) + 27 * (n - i)) % 60;
-			min = Math.round(min / 5) * 5;
+			min = (Math.round(min / 5) * 5) % 60;
 			var timeArr = (hour < 10 ? "0" : "") + hour + ":" + (min < 10 ? "0" : "") + min + " PM";
 
-			var price = generateRandom(200, 900) * (parseInt($( "#seats option:selected" ).text())/2.0 + 0.5);
+			var price = generateRandom(300, 1000);
+			price *= (parseInt($( "#seats option:selected" ).text()) == 2) ? 1.8 : 1;
 			price += price * ((generateRandom(0, 51) + 277 * i) % 50) / 100.0 
-			price += price * parseInt($("#class").prop("selectedIndex")) * 0.2;
+			price += price * parseInt($("#class").prop("selectedIndex")) * 0.3;
 			price += price * (isEmpty($("#date-return").val()) ? 0 : 0.7);
 			price = Math.round(price);
 
 			var row = "<tr><td>" + $("#from").val() + "</td><td>" + $("#to").val() + "</td><td>"
 			+ $("#date").val() + "</td>" + (isEmpty($("#date-return").val()) ? "" : ("<td>" + $("#date-return").val() + "</td>")) + "<td>" + timeFrom + "</td><td>" + timeArr + "</td><td>" + $( "#class option:selected" ).text()
-			+ "</td><td>" + "$ " + price +"</td><td>" + "BOOK BUTTON" + "</td></tr>";
+			+ "</td><td>" + "$ " + price +"</td><td>" + "<button>Book</button>" + "</td></tr>";
 			table += row;
 		};
 		table += "</tbody></table>";
@@ -376,27 +376,29 @@ function generateRandom(from, to) {
 	return sum % (to - from) + from;
 }
 
-function validate() {
-	var ok = false;
-	if ($("#from").val() == "") {
+function isInvalidForm() {
+	var isInvalid = false;
+	var to = $("#to").val();
+	var from = $("#from").val();
+
+	if (isEmpty(from) || !contains(from) || to == from) {
 		$("#from").addClass("error");
-		ok = true;
+		isInvalid = true;
 	};
-	if ($("#to").val() == "") {
+
+	if (isEmpty(to) || !contains(to) || to == from) {
 		$("#to").addClass("error");
-		ok = true;
+		isInvalid = true;
 	};
-	if ($("#date").val() == "") {
+	if (isEmpty($("#date").val())) {
 		$("#date").addClass("error");
-		ok = true;
+		isInvalid = true;
 	};
 
-	if ($("#date-return").is(":visible")) {
-		if ($("#date-return").val() == "") {
-			$("#date-return").addClass("error");
-			ok = true;
-		};
+	if ($("#date-return").is(":visible") && isEmpty($("#date-return").val())) {
+		$("#date-return").addClass("error");
+		isInvalid = true;
 	};
 
-	return ok;
+	return isInvalid;
 }

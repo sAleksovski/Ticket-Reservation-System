@@ -324,13 +324,6 @@ header {
 	clear: both;
 }
 
-#results p {
-	font-family: 'Open Sans Condensed', sans-serif;
-	font-size: 32px;
-	color: black;
-	font-weight: bold;
-}
-
 /* City Guide CSS */
 .frontpage-city-guide h1,.frontpage-city-guide .city-block-header
 {
@@ -528,6 +521,7 @@ header {
 }
 
 #no-results {
+	font-family: 'Open Sans Condensed', sans-serif;
 	text-align: center;
 	font-size: 30px;
 	margin: 40px;
