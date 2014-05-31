@@ -212,6 +212,13 @@ $(function() {
 		maxDate: "+1Y",
 		onClose: function () {
 			$("#date").removeClass("error");
+			var seldate = $(this).datepicker('getDate');
+	        seldate = seldate.toDateString();
+	        seldate = seldate.split(' ');
+	        d = seldate[0] + ", " + seldate[1] + " " + seldate[2];
+	        $("#fs-date").html(d);
+	        $("#fs-time-1").html(seldate[0] + ", ");
+	        $("#fs-time-2").html(seldate[0] + ", ");
 		}
 	});
 	$("#date-return").datepicker({
@@ -219,6 +226,13 @@ $(function() {
 		maxDate: "+1Y",
 		onClose: function () {
 			$("#date-return").removeClass("error");
+			var seldate = $(this).datepicker('getDate');
+	        seldate = seldate.toDateString();
+	        seldate = seldate.split(' ');
+	        d = seldate[0] + ", " + seldate[1] + " " + seldate[2];
+	        $("#fs-return-date").html(d);
+	        $("#fs-return-time-1").html(seldate[0] + ", ");
+	        $("#fs-return-time-2").html(seldate[0] + ", ");
 		}
 	});
 
@@ -273,6 +287,91 @@ $(function() {
 		}
 		viewMoreOpen = !viewMoreOpen;
 	});
+
+	/* Booking */
+	//jQuery time
+	var current_fs, next_fs, previous_fs; //fieldsets
+	var left, opacity, scale; //fieldset properties which we will animate
+	var animating; //flag to prevent quick multi-click glitches
+
+	$(".next").click(function(){
+		if(animating) return false;
+		animating = true;
+		
+		current_fs = $(this).parent();
+		next_fs = $(this).parent().next();
+		
+		//activate next step on progressbar using the index of next_fs
+		$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+		
+		//show the next fieldset
+		next_fs.show(); 
+		//hide the current fieldset with style
+		current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+				//as the opacity of current_fs reduces to 0 - stored in "now"
+				//1. scale current_fs down to 80%
+				scale = 1 - (1 - now) * 0.2;
+				//2. bring next_fs from the right(50%)
+				left = (now * 50)+"%";
+				//3. increase opacity of next_fs to 1 as it moves in
+				opacity = 1 - now;
+				current_fs.css({'transform': 'scale('+scale+')'});
+				next_fs.css({'left': left, 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+				current_fs.hide();
+				animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+		});
+	});
+
+	$(".previous").click(function(){
+		if(animating) return false;
+		animating = true;
+		
+		current_fs = $(this).parent();
+		previous_fs = $(this).parent().prev();
+		
+		//de-activate current step on progressbar
+		$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+		
+		//show the previous fieldset
+		previous_fs.show(); 
+		//hide the current fieldset with style
+		current_fs.animate({opacity: 0}, {
+			step: function(now, mx) {
+				//as the opacity of current_fs reduces to 0 - stored in "now"
+				//1. scale previous_fs from 80% to 100%
+				scale = 0.8 + (1 - now) * 0.2;
+				//2. take current_fs to the right(50%) - from 0%
+				left = ((1-now) * 50)+"%";
+				//3. increase opacity of previous_fs to 1 as it moves in
+				opacity = 1 - now;
+				current_fs.css({'left': left});
+				previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+			}, 
+			duration: 800, 
+			complete: function(){
+				current_fs.hide();
+				animating = false;
+			}, 
+			//this comes from the custom easing plugin
+			easing: 'easeInOutBack'
+		});
+	});
+
+	$(".submit").click(function(){
+		return false;
+	});
+
+	$("#msform-container").click(function(){
+		$(this).addClass('hide');
+	});
+	/* Booking end */
 
 });
 
@@ -340,9 +439,9 @@ function search() {
 			price += price * (isEmpty($("#date-return").val()) ? 0 : 0.7);
 			price = Math.round(price);
 
-			var row = "<tr><td>" + $("#from").val() + "</td><td>" + $("#to").val() + "</td><td>"
-			+ $("#date").val() + "</td>" + (isEmpty($("#date-return").val()) ? "" : ("<td>" + $("#date-return").val() + "</td>")) + "<td>" + timeFrom + "</td><td>" + timeArr + "</td><td>" + $( "#class option:selected" ).text()
-			+ "</td><td>" + "$ " + price +"</td><td>" + "<button>Book</button>" + "</td></tr>";
+			var row = "<tr><td class=\"td-from\">" + $("#from").val() + "</td><td class=\"td-to\">" + $("#to").val() + "</td><td class=\"td-date-depart\">"
+			+ $("#date").val() + "</td>" + (isEmpty($("#date-return").val()) ? "" : ("<td class=\"td-date-return\">" + $("#date-return").val() + "</td>")) + "<td class=\"td-time-start\">" + timeFrom + "</td><td class=\"td-time-end\">" + timeArr + "</td><td class=\"td-class\">" + $( "#class option:selected" ).text()
+			+ "</td><td class=\"td-price\">" + "$" + price +"</td><td>" + "<button onclick=\"tdClick(this)\">Book</button>" + "</td></tr>";
 			table += row;
 		};
 		table += "</tbody></table>";
@@ -401,4 +500,25 @@ function isInvalidForm() {
 	};
 
 	return isInvalid;
+}
+
+function tdClick(element){
+	e = $(element);
+	c = e.parent().parent().find('.td-class').html();
+	p = e.parent().parent().find('.td-price').html();
+	f = e.parent().parent().find('.td-from').html();
+	t = e.parent().parent().find('.td-to').html();
+	time1 = e.parent().parent().find('.td-time-start').html();
+	time2 = e.parent().parent().find('.td-time-end').html();
+	$('.price').html(c + " class, " + p);
+	$('.fs-from').html(f);
+	$('.fs-to').html(t);
+	$('#fs-time-1').append(time1);
+	$('#fs-time-2').append(time2);
+	$('#fs-return-time-1').append(time1);
+	$('#fs-return-time-2').append(time2);
+	if($('#date-return').val() != ""){
+		$('.routing-column-right').removeClass('hide');
+	}
+	$("#msform-container").removeClass('hide');
 }
