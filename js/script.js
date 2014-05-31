@@ -38,6 +38,7 @@ function initialize() {
     						title: "Click to remove"
 						});
 						$("#from").val(results[1].address_components[results[1].address_components.length - 2].long_name);
+						$("#from").removeClass("error");
 
 						google.maps.event.addListener(markerFrom, 'click', function() {
 							removeMarker(markerFrom);
@@ -56,6 +57,7 @@ function initialize() {
     						title: "Click to remove"
 						});
 						$("#to").val(results[1].address_components[results[1].address_components.length - 2].long_name);
+						$("#to").removeClass("error");
 
 						google.maps.event.addListener(markerTo, 'click', function() {
 							removeMarker(markerTo);
@@ -97,7 +99,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 $(function() {
 	// firefox remember input on reload fix
-	$(".input").val("");
+	$("input[type=text]").val("");
 
 	$("#date-return-div").hide();
 	$("#results").hide();
@@ -205,8 +207,20 @@ $(function() {
 		};
 	});
 
-	$("#date").datepicker({ minDate: 0, maxDate: "+1Y" });
-	$("#date-return").datepicker({ minDate: 0, maxDate: "+1Y" });
+	$("#date").datepicker({
+		minDate: 0,
+		maxDate: "+1Y",
+		onClose: function () {
+			$("#date").removeClass("error");
+		}
+	});
+	$("#date-return").datepicker({
+		minDate: 0,
+		maxDate: "+1Y",
+		onClose: function () {
+			$("#date-return").removeClass("error");
+		}
+	});
 
 	$( "#link-second-tab" ).click(function() {
 		$("#date-return-div").show();
@@ -221,6 +235,10 @@ $(function() {
 	});
 
 	$("#button-search").click(function() {
+		var a = validate();
+		if (a) {
+			return;
+		};
 		search();
 		if (! $("#results").is(":visible") ) {
 			$("#results").slideToggle( "slow");
@@ -300,7 +318,7 @@ function search() {
 	var noFlight = (27 * generateRandom(0, 10)) % 10;
 
 	if(noFlight >= (9 - parseInt($("#class").prop("selectedIndex")))) {
-		table = "<p>Sorry, no flights match your search terms.</p>"
+		table = "<div id=\"no-results\">No flights found that meet your criteria.</div>"
 	}
 	else {
 		table = "<table id=\"results-table\"><thead><tr><th>From</th><th>To</th><th>Date Depart</th>" + (isEmpty($("#date-return").val()) ? "" :  "<th>Date Return</th>") +"<th>Departure</th><th>Arrival</th><th>Class</th><th>Price</th><th>Book</th></tr></thead><tbody>";
@@ -323,7 +341,7 @@ function search() {
 			price = Math.round(price);
 
 			var row = "<tr><td>" + $("#from").val() + "</td><td>" + $("#to").val() + "</td><td>"
-			+ $("#date").val() + "</td>" + (isEmpty($("#date-return").val()) ? "" : ("<td>" + $("#date-return").val() + "</td>")) + "<td>" + timeFrom + "</td><td>" + timeArr + "</td><td>" + "Economy"
+			+ $("#date").val() + "</td>" + (isEmpty($("#date-return").val()) ? "" : ("<td>" + $("#date-return").val() + "</td>")) + "<td>" + timeFrom + "</td><td>" + timeArr + "</td><td>" + $( "#class option:selected" ).text()
 			+ "</td><td>" + "$ " + price +"</td><td>" + "BOOK BUTTON" + "</td></tr>";
 			table += row;
 		};
@@ -356,4 +374,29 @@ function generateRandom(from, to) {
 	};
 
 	return sum % (to - from) + from;
+}
+
+function validate() {
+	var ok = false;
+	if ($("#from").val() == "") {
+		$("#from").addClass("error");
+		ok = true;
+	};
+	if ($("#to").val() == "") {
+		$("#to").addClass("error");
+		ok = true;
+	};
+	if ($("#date").val() == "") {
+		$("#date").addClass("error");
+		ok = true;
+	};
+
+	if ($("#date-return").is(":visible")) {
+		if ($("#date-return").val() == "") {
+			$("#date-return").addClass("error");
+			ok = true;
+		};
+	};
+
+	return ok;
 }

@@ -508,14 +508,10 @@ header {
     background-image: url("../images/city_blocks/seattle.jpg")}
 .city-block.load-images.city-block-sanjose {
     background-image: url("../images/city_blocks/sanjose.jpg")}
-.city-block.load-images.city-block-sonoma {
-    background-image: url("../images/city_blocks/sonoma.jpg")}
 .city-block.load-images.city-block-stlouis {
     background-image: url("../images/city_blocks/stlouis.jpg")}
 .city-block.load-images.city-block-stpaul {
     background-image: url("../images/city_blocks/stpaul.jpg")}
-.city-block.load-images.city-block-tampa {
-    background-image: url("../images/city_blocks/tampa.jpg")}
 .city-block.load-images.city-block-tokyo {
     background-image: url("../images/city_blocks/tokyo.jpg")}
 .city-block.load-images.city-block-toronto {
@@ -527,6 +523,18 @@ header {
 
 /* HIPMUNK CSS END */
 
+.error {
+	border: 1px solid red;
+}
+
+#no-results {
+	text-align: center;
+	font-size: 30px;
+	margin: 40px;
+	color: gray;
+}
+
+/* Loadinig animation */
 @import url(http://fonts.googleapis.com/css?family=Lato:100,300,700);
 
 #container h1 {
@@ -646,3 +654,5 @@ header {
    50%{opacity:0.5}
   100%{opacity:1}
 }}
+
+/* Loadinig animation end */
