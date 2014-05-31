@@ -514,12 +514,20 @@ function tdClick(element){
 	$('.price').html(c + " class, " + p);
 	$('.fs-from').html(f);
 	$('.fs-to').html(t);
-	$('#fs-time-1').append(time1);
-	$('#fs-time-2').append(time2);
-	$('#fs-return-time-1').append(time1);
-	$('#fs-return-time-2').append(time2);
+	p1 = $('#fs-time-1').html().split(',')[0];
+	$('#fs-time-1').html(p1 + ", " + time1);
+	p2 = $('#fs-time-2').html().split(',')[0];
+	$('#fs-time-2').html(p2 + ", " + time2);
+	$('#fs-return-time-1').append(p1 + ", " + time1);
+	$('#fs-return-time-2').append(p2 + ", " + time2);
 	if($('#date-return').val() != ""){
 		$('.routing-column-right').removeClass('hide');
 	}
+	if ($( "#seats option:selected" ).text() == 1) {
+		$('#fs-second-passenger').addClass('hide');
+	} else {
+		$('#fs-second-passenger').removeClass('hide');
+	};
+	$('fieldset input[type=text]').val("");
 	$("#msform-container").removeClass('hide');
 }
