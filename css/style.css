@@ -519,7 +519,7 @@ header {
 /* HIPMUNK CSS END */
 
 .error {
-	border: 1px solid red;
+	border: 1px solid red !important;
 }
 
 #no-results {
@@ -873,4 +873,54 @@ header {
 	padding-left: 10px;
 	border-left: 1px solid gray;
 }
+
+.cc-icon-container {
+	width: 52px;
+	height: 34px;
+	display: inline-block;
+}
+
+.cc-generic {
+	width: 51px;
+	height: 31px;
+	margin-top: 13px;
+	background-image: url('../images/cc/generic.png');
+}
+
+.cc-amex {
+	width: 51px;
+	height: 31px;
+	margin-top: 13px;
+	background-image: url('../images/cc/amex.png');
+}
+
+.cc-maestro {
+	width: 51px;
+	height: 31px;
+	margin-top: 13px;
+	background-image: url('../images/cc/maestro.png');
+}
+
+.cc-mastercard {
+	width: 51px;
+	height: 31px;
+	margin-top: 13px;
+	background-image: url('../images/cc/mastercard.png');
+}
+
+.cc-visa {
+	width: 51px;
+	height: 31px;
+	margin-top: 13px;
+	background-image: url('../images/cc/visa.png');
+}
+
+#cc:invalid {
+	color: red;
+}
+
+#cc:valid {
+	color: green;
+}
+
 /* Booking CSS end */

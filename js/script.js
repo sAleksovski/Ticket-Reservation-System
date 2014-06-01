@@ -296,6 +296,7 @@ $(function() {
 
 	$(".next").click(function(){
 		if(animating) return false;
+		if(! isBookingValidated()) return false;
 		animating = true;
 		
 		current_fs = $(this).parent();
@@ -372,6 +373,49 @@ $(function() {
 		if (e.target !== this) return;
 		$(this).addClass('hide');
 	});
+
+	$("#cc").on('input', function(){
+		var text = $(this).val();
+		var amex = "34, 37";
+		var maestro = "5018, 5020, 5038, 5612, 5893, 6304, 6759, 6761, 6762, 6763, 0604, 6390";
+		var mastercard = "51, 52, 53, 54, 55";
+		var visa = "4";
+		if ( text.length > 1 && amex.indexOf( text.substring(0, 2) ) > -1 ) {
+			$('#cc-image').removeClass('cc-generic');
+			$('#cc-image').removeClass('cc-maestro');
+			$('#cc-image').removeClass('cc-mastercard');
+			$('#cc-image').removeClass('cc-visa');
+			$('#cc-image').addClass('cc-amex');
+		} else if ( text.length > 3 && maestro.indexOf( text.substring(0, 4) ) > -1 ) {
+			$('#cc-image').removeClass('cc-generic');
+			$('#cc-image').removeClass('cc-amex');
+			$('#cc-image').removeClass('cc-mastercard');
+			$('#cc-image').removeClass('cc-visa');
+			$('#cc-image').addClass('cc-maestro');
+		} else if ( text.length > 1 && mastercard.indexOf( text.substring(0, 2) ) > -1 ) {
+			$('#cc-image').removeClass('cc-generic');
+			$('#cc-image').removeClass('cc-amex');
+			$('#cc-image').removeClass('cc-maestro');
+			$('#cc-image').removeClass('cc-visa');
+			$('#cc-image').addClass('cc-mastercard');
+		} else if ( text.length > 0 && visa.indexOf( text.substring(0, 1) ) > -1 ) {
+			$('#cc-image').removeClass('cc-generic');
+			$('#cc-image').removeClass('cc-amex');
+			$('#cc-image').removeClass('cc-maestro');
+			$('#cc-image').removeClass('cc-mastercard');
+			$('#cc-image').addClass('cc-visa');
+		} else {
+			$('#cc-image').removeClass('cc-amex');
+			$('#cc-image').removeClass('cc-maestro');
+			$('#cc-image').removeClass('cc-mastercard');
+			$('#cc-image').removeClass('cc-visa');
+			$('#cc-image').addClass('cc-generic');
+		};
+	});
+
+	$('#msform input[type=text]').on('input', function(){
+		$(this).removeClass('error');
+	})
 	/* Booking end */
 
 });
@@ -530,4 +574,60 @@ function tdClick(element){
 	};
 	$('fieldset input[type=text]').val("");
 	$("#msform-container").removeClass('hide');
+}
+
+function isBookingValidated() {
+	if (! $('#progressbar li:nth-child(2)').hasClass('active')) {
+		return true;
+	};
+	if (! $('#progressbar li:nth-child(3)').hasClass('active')) {
+		ok = true;
+		if($('#fs-name1').val() === ""){
+			$('#fs-name1').addClass('error');
+			ok = false;
+		}
+		if($('#fs-birth1').val() === ""){
+			$('#fs-birth1').addClass('error');
+			ok = false;
+		}
+
+		if (! $('#fs-second-passenger').hasClass('hide')) {
+			if($('#fs-name2').val() === ""){
+				$('#fs-name2').addClass('error');
+				ok = false;
+			}
+			if($('#fs-birth2').val() === ""){
+				$('#fs-birth2').addClass('error');
+				ok = false;
+			}			
+		};
+
+		return ok;
+	};
+	if (! $('#progressbar li:nth-child(4)').hasClass('active')) {
+		ok = true;
+		if($('#cc-name').val() === ""){
+			$('#cc-name').addClass('error');
+			ok = false;
+		}
+		if($('#cc-month').val() === ""){
+			$('#cc-month').addClass('error');
+			ok = false;
+		}
+		if($('#cc-year').val() === ""){
+			$('#cc-year').addClass('error');
+			ok = false;
+		}
+		if($('#cc').css('color') != "rgb(0, 128, 0)"){
+			$('#cc').addClass('error');
+			ok = false;
+		}
+		if($('#cc-cvc').val() === ""){
+			$('#cc-cvc').addClass('error');
+			ok = false;
+		}
+
+		return ok;
+	};
+	return true;
 }
