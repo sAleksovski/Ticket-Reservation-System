@@ -381,34 +381,19 @@ $(function() {
 		var mastercard = "51, 52, 53, 54, 55";
 		var visa = "4";
 		if ( text.length > 1 && amex.indexOf( text.substring(0, 2) ) > -1 ) {
-			$('#cc-image').removeClass('cc-generic');
-			$('#cc-image').removeClass('cc-maestro');
-			$('#cc-image').removeClass('cc-mastercard');
-			$('#cc-image').removeClass('cc-visa');
+			$('#cc-image').removeClass();
 			$('#cc-image').addClass('cc-amex');
 		} else if ( text.length > 3 && maestro.indexOf( text.substring(0, 4) ) > -1 ) {
-			$('#cc-image').removeClass('cc-generic');
-			$('#cc-image').removeClass('cc-amex');
-			$('#cc-image').removeClass('cc-mastercard');
-			$('#cc-image').removeClass('cc-visa');
+			$('#cc-image').removeClass();
 			$('#cc-image').addClass('cc-maestro');
 		} else if ( text.length > 1 && mastercard.indexOf( text.substring(0, 2) ) > -1 ) {
-			$('#cc-image').removeClass('cc-generic');
-			$('#cc-image').removeClass('cc-amex');
-			$('#cc-image').removeClass('cc-maestro');
-			$('#cc-image').removeClass('cc-visa');
+			$('#cc-image').removeClass();
 			$('#cc-image').addClass('cc-mastercard');
 		} else if ( text.length > 0 && visa.indexOf( text.substring(0, 1) ) > -1 ) {
-			$('#cc-image').removeClass('cc-generic');
-			$('#cc-image').removeClass('cc-amex');
-			$('#cc-image').removeClass('cc-maestro');
-			$('#cc-image').removeClass('cc-mastercard');
+			$('#cc-image').removeClass();
 			$('#cc-image').addClass('cc-visa');
 		} else {
-			$('#cc-image').removeClass('cc-amex');
-			$('#cc-image').removeClass('cc-maestro');
-			$('#cc-image').removeClass('cc-mastercard');
-			$('#cc-image').removeClass('cc-visa');
+			$('#cc-image').removeClass();
 			$('#cc-image').addClass('cc-generic');
 		};
 	});
