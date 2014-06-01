@@ -236,6 +236,18 @@ $(function() {
 		}
 	});
 
+	$("#fs-birth1").datepicker({
+      	changeMonth: true,
+      	changeYear: true,
+      	yearRange:'-100:+0'
+    });
+
+    $("#fs-birth2").datepicker({
+      	changeMonth: true,
+      	changeYear: true,
+      	yearRange:'-100:+0'
+    });
+
 	$( "#link-second-tab" ).click(function() {
 		$("#date-return-div").show();
 		$("#link-first-tab").removeClass("ui-state-active");
@@ -567,39 +579,44 @@ function isBookingValidated() {
 	};
 	if (! $('#progressbar li:nth-child(3)').hasClass('active')) {
 		ok = true;
-		if($('#fs-name1').val() === ""){
+		var patt = new RegExp("^[a-z ,.'-]+$");
+		if(!patt.test($('#fs-name1').val())){
 			$('#fs-name1').addClass('error');
 			ok = false;
 		}
-		if($('#fs-birth1').val() === ""){
+		var patt2 = new RegExp("^[0-9]{2}/[0-9]{2}/[0-9]{4}/$");
+		if($('#fs-birth1').val() === "") {
 			$('#fs-birth1').addClass('error');
 			ok = false;
 		}
 
 		if (! $('#fs-second-passenger').hasClass('hide')) {
-			if($('#fs-name2').val() === ""){
+			if(!patt.test($('#fs-name2').val())){
 				$('#fs-name2').addClass('error');
 				ok = false;
 			}
-			if($('#fs-birth2').val() === ""){
+			if($('#fs-birth2').val() === "") {
 				$('#fs-birth2').addClass('error');
 				ok = false;
-			}			
+			}		
 		};
 
 		return ok;
 	};
 	if (! $('#progressbar li:nth-child(4)').hasClass('active')) {
 		ok = true;
-		if($('#cc-name').val() === ""){
+		var patt = new RegExp("^[a-z ,.'-]+$");
+		if(!patt.test($('#cc-name').val())) {
 			$('#cc-name').addClass('error');
 			ok = false;
 		}
-		if($('#cc-month').val() === ""){
+		patt = new RegExp("^(0?[1-9]|1[012])$");
+		if(!patt.test($('#cc-month').val())) {
 			$('#cc-month').addClass('error');
 			ok = false;
 		}
-		if($('#cc-year').val() === ""){
+		patt = new RegExp("^[0-9]{2}$");
+		if(!patt.test($('#cc-year').val())) {
 			$('#cc-year').addClass('error');
 			ok = false;
 		}
@@ -607,7 +624,8 @@ function isBookingValidated() {
 			$('#cc').addClass('error');
 			ok = false;
 		}
-		if($('#cc-cvc').val() === ""){
+		patt = new RegExp("^[0-9]{3}$")
+		if(!patt.test($('#cc-cvc').val())){
 			$('#cc-cvc').addClass('error');
 			ok = false;
 		}
