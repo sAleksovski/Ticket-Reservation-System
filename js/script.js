@@ -555,6 +555,24 @@ function generateRandom(from, to) {
 	return sum % (to - from) + from;
 }
 
+function calculateDuration(time1, time2) {
+	var hFrom = parseInt(time1.substring(0,2));
+	var mFrom = parseInt(time1.substring(3,5));
+	var hTo = parseInt(time2.substring(0,2)) + 12;
+	var mTo = parseInt(time2.substring(3,5));
+	var mDurr = 0;
+	var hDurr = 0;
+	if (mFrom > mTo) {
+		mDurr = mTo + 60 - mFrom;
+		hDurr = hTo - hFrom - 1;
+	}
+	else {
+		mDurr = mTo - mFrom;
+		hDurr = hTo - hFrom;
+	}
+	return (hDurr < 10 ? "0" : "") + hDurr + "h " + (mDurr < 10 ? "0" : "") + mDurr + "m";
+}
+
 function tdClick(element){
 	$( '#msform-container' ).load( "ajax/booking-form.html", function() {
 
@@ -597,6 +615,8 @@ function tdClick(element){
 		$('#fs-return-time-1').html(p3 + ", " + time1);
 		p4 = $('#fs-return-time-2').html().split(',')[0];
 		$('#fs-return-time-2').html(p4 + ", " + time2);
+		
+		$('.duration').html(calculateDuration(time1, time2));
 
 		if($('#date-return').val() != ""){
 			$('.routing-column-right').removeClass('hide');
