@@ -6,8 +6,8 @@ Demo Ticket Reservation System using Google Maps API for choosing and displaying
 
 TO-DO List
 > - [ ] Add error messages in validation
-> - [ ] Payment dialog/page 
-> - [ ] Confirm dialog/page
+> - [x] Payment dialog/page 
+> - [x] Confirm dialog/page
 > - [ ] Review user interface 
 > - [ ] Review visual appearance
 > - [ ] More visual hints(Remove marker, Sort results, Open map)
