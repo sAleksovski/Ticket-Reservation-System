@@ -798,15 +798,14 @@ header {
 	position: relative;
 	margin-left: 10px;
 	font-weight: bold;
-	min-height: 80px;
 	text-align: left;
+	margin-bottom: 10px;
 }
 
 .routing-codes {
 	display: block;
 	margin: 0;
 	padding: 0;
-	height: 23px;
 	width: 200px;
 }
 
@@ -923,4 +922,25 @@ header {
 	color: green;
 }
 
+.fs-passenger-details {
+	text-align: left;
+	margin-left: 10px;
+}
+
+.fs-passenger-text {
+	color: gray;
+}
+
+.fs-passenger-name {
+	font-size: 14px;
+}
+
+#fs-passenger-2 {
+	margin-top: 5px;
+}
+
+#fs-to-pay {
+	margin: 20px;
+	font-size: 16px;
+}
 /* Booking CSS end */

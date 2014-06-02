@@ -305,7 +305,8 @@
 					<div class="routing-columns">
 						<div class="routing-column">
 							<div class="routing-description">
-								<div class="routing-codes"><span class="fs-from">California</span>
+								<div class="routing-codes">
+									<span class="fs-from">California</span>
 									<div class="arrow">
 										&#8203;
 										<div class="img"></div>
@@ -328,7 +329,8 @@
 						</div>
 						<div class="routing-column routing-column-right hide">
 							<div class="routing-description">
-								<div class="routing-codes"><span class="fs-to">New York</span>
+								<div class="routing-codes">
+									<span class="fs-to">New York</span>
 									<div class="arrow">
 										&#8203;
 										<div class="img"></div>
@@ -384,12 +386,59 @@
 					<input type="button" name="next" class="next action-button" value="Next" />
 				</fieldset>
 				<fieldset>
-					<h2 class="fs-title">Personal Details</h2>
-					<h3 class="fs-subtitle">We will never sell it</h3>
-					<input type="text" name="fname" placeholder="First Name" />
-					<input type="text" name="lname" placeholder="Last Name" />
-					<input type="text" name="phone" placeholder="Phone" />
-					<textarea name="address" placeholder="Address"></textarea>
+					<h2 class="fs-title">Confirm Payment</h2>
+					<h3 class="fs-subtitle">Please verify your details</h3>
+					<div class="routing-columns">
+						<div class="routing-column">
+							<div class="routing-description">
+								<div class="routing-codes">
+									<span class="fs-from">California</span>
+									<div class="arrow">
+										&#8203;
+										<div class="img"></div>
+									</div>
+									<span class="fs-to">New York</span>
+								</div>
+								<div class="time" id="fs-final-time-1">Fri, Jun 6, 12:00 PM</div>
+							</div>
+							<div class="routing-description hide" id="fs-final-return">
+								<div class="routing-codes">
+									<span class="fs-to">New York</span>
+									<div class="arrow">
+										&#8203;
+										<div class="img"></div>
+									</div>
+									<span class="fs-from">California</span>
+								</div>
+								<div class="time" id="fs-final-time-2">Fri, Jun 6, 12:00 PM</div>
+							</div>
+						</div>
+
+						<div class="routing-column routing-column-right">
+							<div class="fs-passenger-details">
+								<div id="fs-passenger-1">
+									<div class="fs-passenger-text">Passenger #1</div>
+									<div id="fs-passenger-info">
+										<div id="fs-passenger-1-name" class="fs-passenger-name">
+											Stefan Aleksovski
+										</div>
+										<div id="fs-passenger-1-birth" class="time">01/01/1993</div>
+									</div>
+								</div>
+								<div id="fs-passenger-2">
+									<div class="fs-passenger-text">Passenger #2</div>
+									<div id="fs-passenger-info">
+										<div id="fs-passenger-2-name" class="fs-passenger-name">
+											Maja Aleksovska
+										</div>
+										<div id="fs-passenger-2-birth" class="time">01/01/1993</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+					<div id="fs-to-pay"><span id="fs-final-price">$100</span> will be charged to your credit card.</div>
 					<input type="button" name="previous" class="previous action-button" value="Previous" />
 					<input type="submit" name="submit" class="submit action-button" value="Submit" />
 				</fieldset>

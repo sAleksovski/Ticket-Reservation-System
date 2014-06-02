@@ -229,26 +229,17 @@ $(function() {
 		onClose: function () {
 			$("#date-return").removeClass("error");
 			var seldate = $(this).datepicker('getDate');
-	        seldate = seldate.toDateString();
-	        seldate = seldate.split(' ');
-	        d = seldate[0] + ", " + seldate[1] + " " + seldate[2];
-	        $("#fs-return-date").html(d);
-	        $("#fs-return-time-1").html(seldate[0] + ", ");
-	        $("#fs-return-time-2").html(seldate[0] + ", ");
+	        if( !isEmpty(seldate)) {
+		        seldate = seldate.toDateString();
+		        seldate = seldate.split(' ');
+		        d = seldate[0] + ", " + seldate[1] + " " + seldate[2];
+		        $("#fs-return-date").html(d);
+		        $("#fs-return-time-1").html(seldate[0] + ", ");
+		        $("#fs-return-time-2").html(seldate[0] + ", ");
+		    }
 		}
 	});
 
-	$("#fs-birth1").datepicker({
-      	changeMonth: true,
-      	changeYear: true,
-      	yearRange:'-100:-6'
-    });
-
-    $("#fs-birth2").datepicker({
-      	changeMonth: true,
-      	changeYear: true,
-      	yearRange:'-100:-6'
-    });
 
 	$( "#link-second-tab" ).click(function() {
 		$("#date-return-div").show();
@@ -414,7 +405,40 @@ $(function() {
 
 	$('#msform input[type=text]').on('input', function(){
 		$(this).removeClass('error');
-	})
+	});
+
+	$("#fs-birth1").datepicker({
+      	changeMonth: true,
+      	changeYear: true,
+      	yearRange:'-100:-6',
+      	defaultDate: "02/10/1994",
+      	onClose: function() {
+      		$('#fs-birth1').removeClass('error');
+      		var b = $(this).datepicker('getDate');
+      		if( !isEmpty(b)) {
+	        	b = b.toDateString();
+	        	b = b.split(' ');
+      			$('#fs-passenger-1-birth').html(b[2] + " " + b[1] + ", " + b[3]);
+      		}
+      	}
+    });
+
+    $("#fs-birth2").datepicker({
+      	changeMonth: true,
+      	changeYear: true,
+      	yearRange:'-100:-6',
+      	defaultDate: "02/10/1994",
+      	onClose: function() {
+      		$('#fs-birth2').removeClass('error');
+      		var b = $(this).datepicker('getDate');
+      		if( !isEmpty(b)) {
+	        	b = b.toDateString();
+	        	b = b.split(' ');
+      			$('#fs-passenger-2-birth').html(b[2] + " " + b[1] + ", " + b[3]);
+      		}
+      	}
+    });
+
 	/* Booking end */
 
 });
@@ -561,16 +585,29 @@ function tdClick(element){
 	$('#fs-time-1').html(p1 + ", " + time1);
 	p2 = $('#fs-time-2').html().split(',')[0];
 	$('#fs-time-2').html(p2 + ", " + time2);
-	$('#fs-return-time-1').append(p1 + ", " + time1);
-	$('#fs-return-time-2').append(p2 + ", " + time2);
+	
+	p3 = $('#fs-return-time-1').html().split(',')[0];
+	$('#fs-return-time-1').html(p3 + ", " + time1);
+	p4 = $('#fs-return-time-2').html().split(',')[0];
+	$('#fs-return-time-2').html(p4 + ", " + time2);
+
 	if($('#date-return').val() != ""){
 		$('.routing-column-right').removeClass('hide');
+		$('#fs-final-return').removeClass('hide');
 	}
 	if ($( "#seats option:selected" ).text() == 1) {
 		$('#fs-second-passenger').addClass('hide');
+		$('#fs-passenger-2').addClass('hide');
 	} else {
 		$('#fs-second-passenger').removeClass('hide');
+		$('#fs-passenger-2').removeClass('hide');
 	};
+	ti = $('#fs-time-1').html().split(',');
+	$('#fs-final-time-1').html($('#fs-date').html() + "," + ti[1]);
+	$('#fs-final-time-2').html($('#fs-return-date').html() + ti[1]);
+
+	$('#fs-final-price').html(p);
+
 	$('fieldset input[type=text]').val("");
 	$("#msform-container").removeClass('hide');
 }
