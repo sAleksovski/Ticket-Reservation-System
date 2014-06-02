@@ -23,8 +23,8 @@ function initialize() {
 		var lat = parseFloat(latlngStr[0]);
 		var lng = parseFloat(latlngStr[1]);
 		var latlng = new google.maps.LatLng(lat, lng);
-    	var geocoder = new google.maps.Geocoder();
-    	geocoder.geocode({'latLng': latlng}, function(results, status) {
+		var geocoder = new google.maps.Geocoder();
+		geocoder.geocode({'latLng': latlng}, function(results, status) {
 			if (status == google.maps.GeocoderStatus.OK && results[1]) {
 				// user clicked on US and return result is in accepted format
 				if(results[1].address_components[results[1].address_components.length - 1].short_name == "US" &&
@@ -32,10 +32,10 @@ function initialize() {
 
 					//Fill #from field
 					if (markerFrom == null) {
-    					markerFrom = new google.maps.Marker({
-   						 	position: event.latLng, 
-    						map: map,
-    						title: "Click to remove"
+						markerFrom = new google.maps.Marker({
+							 	position: event.latLng, 
+							map: map,
+							title: "Click to remove"
 						});
 						$("#from").val(results[1].address_components[results[1].address_components.length - 2].long_name);
 						$("#from").removeClass("error");
@@ -51,10 +51,10 @@ function initialize() {
 
 					// Fill #to field and draw  path
 					else if (markerTo == null) {
-    					markerTo = new google.maps.Marker({
-   						 	position: event.latLng, 
-    						map: map,
-    						title: "Click to remove"
+						markerTo = new google.maps.Marker({
+							 	position: event.latLng, 
+							map: map,
+							title: "Click to remove"
 						});
 						$("#to").val(results[1].address_components[results[1].address_components.length - 2].long_name);
 						$("#to").removeClass("error");
@@ -76,8 +76,8 @@ function initialize() {
 // drawing a line between two markers on map
 function drawPath () {
 	var flightPlanCoordinates = [
-				    new google.maps.LatLng(markerFrom.getPosition().lat(), markerFrom.getPosition().lng()),
-				    new google.maps.LatLng(markerTo.getPosition().lat(), markerTo.getPosition().lng())
+					new google.maps.LatLng(markerFrom.getPosition().lat(), markerFrom.getPosition().lng()),
+					new google.maps.LatLng(markerTo.getPosition().lat(), markerTo.getPosition().lng())
 			  	];
 
 			  	if (flightPath != null)
@@ -94,11 +94,40 @@ function drawPath () {
 				flightPath.setMap(map);
 }
 
+// remove marker from map and set null the marker
+function removeMarker (marker) {
+	marker.setMap(null);
+	flightPath.setMap(null);
+	if(marker == markerFrom) {
+		$("#from").val("");
+		markerFrom = null;
+	}
+	else if(marker == markerTo) {
+		$("#to").val("");
+		markerTo = null;
+	}
+}
+
+function flip (addClass) {
+	if (addClass) {
+		$(".ad-card-text").css("opacity", "1.0");
+		$("#flip-card").addClass('flipped');
+	} else {
+		$("#flip-card").removeClass('flipped');
+		setTimeout(function(){$(".ad-card-text").css("opacity", "0.8")}, 1000);
+	};
+}
+
 google.maps.event.addDomListener(window, 'load', initialize);
 // MAPA KRAJ
 
+// After loading
 $(function() {
-	// firefox remember input on reload fix
+	initSearchForm();
+	initCityGuide();
+});
+
+function initSearchForm() {
 	$("input[type=text]").val("");
 
 	$("#date-return-div").hide();
@@ -214,29 +243,17 @@ $(function() {
 			var seldate = $(this).datepicker('getDate');
 			if( !isEmpty(seldate)) {
 				$("#date").removeClass("error");
-		        seldate = seldate.toDateString();
-		        seldate = seldate.split(' ');
-		        d = seldate[0] + ", " + seldate[1] + " " + seldate[2];
-		        $("#fs-date").html(d);
-		        $("#fs-time-1").html(seldate[0] + ", ");
-		        $("#fs-time-2").html(seldate[0] + ", ");
-	    	}
+			}
 		}
 	});
 	$("#date-return").datepicker({
 		minDate: 0,
 		maxDate: "+1Y",
 		onClose: function () {
-			$("#date-return").removeClass("error");
 			var seldate = $(this).datepicker('getDate');
-	        if( !isEmpty(seldate)) {
-		        seldate = seldate.toDateString();
-		        seldate = seldate.split(' ');
-		        d = seldate[0] + ", " + seldate[1] + " " + seldate[2];
-		        $("#fs-return-date").html(d);
-		        $("#fs-return-time-1").html(seldate[0] + ", ");
-		        $("#fs-return-time-2").html(seldate[0] + ", ");
-		    }
+			if( !isEmpty(seldate)) {
+				$("#date-return").removeClass("error");
+			}
 		}
 	});
 
@@ -263,16 +280,18 @@ $(function() {
 		};
 
 		$("html,body").animate({
-			    scrollTop: $("#results").offset().top - 10
+			scrollTop: $("#results").offset().top - 10
 		});
 	});
+}
 
+function initCityGuide() {
 	$(".city-block").click(function() {
 		var string = $(this).find(".state-name").html();
 		string = string.substring(0, string.length - 5);
 		
 		// trigger autocomplete event
-		var keyEvent = $.Event("keydown");          
+		var keyEvent = $.Event("keydown");
 		keyEvent.keyCode = $.ui.keyCode.DOWN;  // event for pressing "down" key
 		$("#to").val(string);
 		$("#to").trigger(keyEvent);  // Press "down" key twice to select first Item
@@ -280,19 +299,28 @@ $(function() {
 		keyEvent.keyCode = $.ui.keyCode.ENTER; // event for pressing the "enter" key
 		$("#to").trigger(keyEvent); 
 	});
-
+	var viewMoreOpen = false;
 	$(".expand-city-guide").click(function() {
 		if(viewMoreOpen) {
 			$("#expand-city-div").find("div").addClass("hidden");
 			$(".expand-city-guide").html("Show more destionations");
 		}
 		else {
-			$("#expand-city-div").find("div").removeClass("hidden");
-			$(".expand-city-guide").html("Show less destionations");
-		}
+			if($("#expand-city-div").html() === "") {
+				$("#expand-city-div").load( "ajax/city-guide.html", function() {
+					$("#expand-city-div").find("div").removeClass("hidden");
+					$(".expand-city-guide").html("Show less destionations");
+				});
+			} else {
+				$("#expand-city-div").find("div").removeClass("hidden");
+				$(".expand-city-guide").html("Show less destionations");
+			};
+		};
 		viewMoreOpen = !viewMoreOpen;
 	});
+}
 
+function initBooking() {
 	/* Booking */
 	//jQuery time
 	var current_fs, next_fs, previous_fs; //fieldsets
@@ -403,46 +431,54 @@ $(function() {
 		};
 	});
 
+	$('#fs-name1').on('input', function() {
+		var text = $(this).val();
+		$('#fs-passenger-1-name').html(text);
+	});
+
+	$('#fs-name2').on('input', function() {
+		var text = $(this).val();
+		$('#fs-passenger-2-name').html(text);
+	});
+
 	$('#msform input[type=text]').on('input', function(){
 		$(this).removeClass('error');
 	});
 
 	$("#fs-birth1").datepicker({
-      	changeMonth: true,
-      	changeYear: true,
-      	yearRange:'-100:-6',
-      	defaultDate: "02/10/1994",
-      	onClose: function() {
-      		$('#fs-birth1').removeClass('error');
-      		var b = $(this).datepicker('getDate');
-      		if( !isEmpty(b)) {
-	        	b = b.toDateString();
-	        	b = b.split(' ');
-      			$('#fs-passenger-1-birth').html(b[2] + " " + b[1] + ", " + b[3]);
-      		}
-      	}
-    });
+		changeMonth: true,
+		changeYear: true,
+		yearRange:'-100:-6',
+		defaultDate: "02/10/1994",
+		onClose: function() {
+			$('#fs-birth1').removeClass('error');
+			var b = $(this).datepicker('getDate');
+			if( !isEmpty(b)) {
+				b = b.toDateString();
+				b = b.split(' ');
+				$('#fs-passenger-1-birth').html(b[2] + " " + b[1] + ", " + b[3]);
+			}
+		}
+	});
 
-    $("#fs-birth2").datepicker({
-      	changeMonth: true,
-      	changeYear: true,
-      	yearRange:'-100:-6',
-      	defaultDate: "02/10/1994",
-      	onClose: function() {
-      		$('#fs-birth2').removeClass('error');
-      		var b = $(this).datepicker('getDate');
-      		if( !isEmpty(b)) {
-	        	b = b.toDateString();
-	        	b = b.split(' ');
-      			$('#fs-passenger-2-birth').html(b[2] + " " + b[1] + ", " + b[3]);
-      		}
-      	}
-    });
+	$("#fs-birth2").datepicker({
+		changeMonth: true,
+		changeYear: true,
+		yearRange:'-100:-6',
+		defaultDate: "02/10/1994",
+		onClose: function() {
+			$('#fs-birth2').removeClass('error');
+			var b = $(this).datepicker('getDate');
+			if( !isEmpty(b)) {
+				b = b.toDateString();
+				b = b.split(' ');
+					$('#fs-passenger-2-birth').html(b[2] + " " + b[1] + ", " + b[3]);
+			}
+		}
+	});
+}
 
-	/* Booking end */
-
-});
-
+// Helper functions
 function contains (target) {
 	var res = false;
 	$.each(stateCoor, function(i, item) {
@@ -453,28 +489,8 @@ function contains (target) {
 	return res;
 }
 
-// remove marker from map and set null the marker
-function removeMarker (marker) {
-	marker.setMap(null);
-	flightPath.setMap(null);
-	if(marker == markerFrom) {
-		$("#from").val("");
-		markerFrom = null;
-	}
-	else if(marker == markerTo) {
-		$("#to").val("");
-		markerTo = null;
-	}
-}
-
-function flip (addClass) {
-	if (addClass) {
-		$(".ad-card-text").css("opacity", "1.0");
-		$("#flip-card").addClass('flipped');
-	} else {
-		$("#flip-card").removeClass('flipped');
-		setTimeout(function(){$(".ad-card-text").css("opacity", "0.8")}, 1000);
-	};
+function isEmpty(str) {
+	return (!str || 0 === str.length);
 }
 
 function search() {
@@ -517,14 +533,10 @@ function search() {
 	setTimeout(function(){$("#results").html(table)}, 2000);
 	setTimeout(function(){$("#results-table").tablesorter({
 		textExtraction: function(node){ 
-            // for numbers formattted like $1,000.50 e.g. English
-            return $(node).text().replace(/[,$£€]/g,'');
-         }
+		// for numbers formattted like $1,000.50 e.g. English
+			return $(node).text().replace(/[,$£€]/g,'');
+		}
 	})}, 2100);
-}
-
-function isEmpty(str) {
-    return (!str || 0 === str.length);
 }
 
 function generateRandom(from, to) {
@@ -543,6 +555,72 @@ function generateRandom(from, to) {
 	return sum % (to - from) + from;
 }
 
+function tdClick(element){
+	$( '#msform-container' ).load( "ajax/booking-form.html", function() {
+
+		initBooking();
+
+		var seldate = $('#date').datepicker('getDate');
+		seldate = seldate.toDateString();
+		seldate = seldate.split(' ');
+		d = seldate[0] + ", " + seldate[1] + " " + seldate[2];
+		$("#fs-date").html(d);
+		$("#fs-time-1").html(seldate[0] + ", ");
+		$("#fs-time-2").html(seldate[0] + ", ");
+
+		seldate = $('#date-return').datepicker('getDate');
+		if( !isEmpty(seldate)) {
+			seldate = seldate.toDateString();
+			seldate = seldate.split(' ');
+			d = seldate[0] + ", " + seldate[1] + " " + seldate[2];
+			$("#fs-return-date").html(d);
+			$("#fs-return-time-1").html(seldate[0] + ", ");
+			$("#fs-return-time-2").html(seldate[0] + ", ");
+		}
+
+		e = $(element);
+		c = e.parent().parent().find('.td-class').html();
+		p = e.parent().parent().find('.td-price').html();
+		f = e.parent().parent().find('.td-from').html();
+		t = e.parent().parent().find('.td-to').html();
+		time1 = e.parent().parent().find('.td-time-start').html();
+		time2 = e.parent().parent().find('.td-time-end').html();
+		$('.price').html(c + " class, " + p);
+		$('.fs-from').html(f);
+		$('.fs-to').html(t);
+		p1 = $('#fs-time-1').html().split(',')[0];
+		$('#fs-time-1').html(p1 + ", " + time1);
+		p2 = $('#fs-time-2').html().split(',')[0];
+		$('#fs-time-2').html(p2 + ", " + time2);
+		
+		p3 = $('#fs-return-time-1').html().split(',')[0];
+		$('#fs-return-time-1').html(p3 + ", " + time1);
+		p4 = $('#fs-return-time-2').html().split(',')[0];
+		$('#fs-return-time-2').html(p4 + ", " + time2);
+
+		if($('#date-return').val() != ""){
+			$('.routing-column-right').removeClass('hide');
+			$('#fs-final-return').removeClass('hide');
+		};
+		if ($( "#seats option:selected" ).text() == 1) {
+			$('#fs-second-passenger').addClass('hide');
+			$('#fs-passenger-2').addClass('hide');
+		} else {
+			$('#fs-second-passenger').removeClass('hide');
+			$('#fs-passenger-2').removeClass('hide');
+		};
+		ti = $('#fs-time-1').html().split(',');
+		$('#fs-final-time-1').html($('#fs-date').html() + "," + ti[1]);
+		$('#fs-final-time-2').html($('#fs-return-date').html() + ti[1]);
+
+		$('#fs-final-price').html(p);
+
+		$('fieldset input[type=text]').val("");
+		$("#msform-container").removeClass('hide');
+	});
+}
+
+// Validation
 function isInvalidForm() {
 	var isInvalid = false;
 	var to = $("#to").val();
@@ -568,48 +646,6 @@ function isInvalidForm() {
 	};
 
 	return isInvalid;
-}
-
-function tdClick(element){
-	e = $(element);
-	c = e.parent().parent().find('.td-class').html();
-	p = e.parent().parent().find('.td-price').html();
-	f = e.parent().parent().find('.td-from').html();
-	t = e.parent().parent().find('.td-to').html();
-	time1 = e.parent().parent().find('.td-time-start').html();
-	time2 = e.parent().parent().find('.td-time-end').html();
-	$('.price').html(c + " class, " + p);
-	$('.fs-from').html(f);
-	$('.fs-to').html(t);
-	p1 = $('#fs-time-1').html().split(',')[0];
-	$('#fs-time-1').html(p1 + ", " + time1);
-	p2 = $('#fs-time-2').html().split(',')[0];
-	$('#fs-time-2').html(p2 + ", " + time2);
-	
-	p3 = $('#fs-return-time-1').html().split(',')[0];
-	$('#fs-return-time-1').html(p3 + ", " + time1);
-	p4 = $('#fs-return-time-2').html().split(',')[0];
-	$('#fs-return-time-2').html(p4 + ", " + time2);
-
-	if($('#date-return').val() != ""){
-		$('.routing-column-right').removeClass('hide');
-		$('#fs-final-return').removeClass('hide');
-	}
-	if ($( "#seats option:selected" ).text() == 1) {
-		$('#fs-second-passenger').addClass('hide');
-		$('#fs-passenger-2').addClass('hide');
-	} else {
-		$('#fs-second-passenger').removeClass('hide');
-		$('#fs-passenger-2').removeClass('hide');
-	};
-	ti = $('#fs-time-1').html().split(',');
-	$('#fs-final-time-1').html($('#fs-date').html() + "," + ti[1]);
-	$('#fs-final-time-2').html($('#fs-return-date').html() + ti[1]);
-
-	$('#fs-final-price').html(p);
-
-	$('fieldset input[type=text]').val("");
-	$("#msform-container").removeClass('hide');
 }
 
 function isBookingValidated() {
@@ -663,8 +699,8 @@ function isBookingValidated() {
 			ok = false;
 		}
 		patt = new RegExp("^[0-9]{3,4}$")
-		if(!patt.test($('#cc-cvc').val())){
-			$('#cc-cvc').addClass('error');
+		if(!patt.test($('#cc-cvv').val())){
+			$('#cc-cvv').addClass('error');
 			ok = false;
 		}
 

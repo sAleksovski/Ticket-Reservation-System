@@ -7,10 +7,10 @@
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 		<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:700' rel='stylesheet' type='text/css'>
-		<script src="js/jquery-1.10.2.js"></script>
-		<script src="js/jquery-ui.js"></script>
-		<script src="http://thecodeplayer.com/uploads/js/jquery.easing.min.js" type="text/javascript"></script>
-		<script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js" type="text/javascript"></script>
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.17.1/jquery.tablesorter.min.js"></script>
 		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
 		<script type="text/javascript" src="js/stateCoor.js"></script>
 		<script type="text/javascript" src="js/script.js"></script>
@@ -26,51 +26,51 @@
 				<div id="search-form" class="card">
 					<h3 class="card-heading simple">Book a Flight</h3>
 					<div class="card-body">
-					  <div id="tabs">
-					  	<ul class="nav nav-tabs">
-					  		<li id="link-first-tab" class="ui-state-active"><span>One way</span></li>
-					  		<li id="link-second-tab" ><span>Roundtrip</span></li>
-					  	</ul>
-					  	<div class="tab-content">
-						  	<div id="tabs-content" class="tab-pane">
-						  		<form>
-								  <div class="row">
-								  	<span class="left">From</span>
-								  	<input type="text" class="input" id="from" />
-								  </div>
-								  <div class="row">
-								  	<span class="left">To</span>
-								  	<input type="text" class="input" id="to" />
-								  </div>
-								  <div class="row">
-								  	<span class="left">Depart</span>
-								  	<input type="text" class="input" id="date" readonly />
-								  </div>
-								  <div class="row" id="date-return-div">
-								  	<span class="left">Return</span>
-								  	<input type="text" class="input" id="date-return" readonly />
-								  </div>
-								  <div class="row">
-								  	<span class="left">Class</span>
-								  	<select class="input" id="class">
-								  		<option value="Economy">Economy</option>
-								  		<option value="Business">Business</option>
-								  		<option value="First">First</option>
-								  	</select>
-								  </div>
-								  <div class="row">
-								  	<span class="left">Seats</span>
-								  	<select class="input" id="seats">
-								  		<option value="1">1</option>
-								  		<option value="2">2</option>
-								  	</select>
-								  </div>
+						<div id="tabs">
+							<ul class="nav nav-tabs">
+								<li id="link-first-tab" class="ui-state-active"><span>One way</span></li>
+								<li id="link-second-tab" ><span>Roundtrip</span></li>
+							</ul>
+							<div class="tab-content">
+								<div id="tabs-content" class="tab-pane">
+									<form>
+									<div class="row">
+										<span class="left">From</span>
+										<input type="text" class="input" id="from" />
+									</div>
+									<div class="row">
+										<span class="left">To</span>
+										<input type="text" class="input" id="to" />
+									</div>
+									<div class="row">
+										<span class="left">Depart</span>
+										<input type="text" class="input" id="date" readonly />
+									</div>
+									<div class="row" id="date-return-div">
+										<span class="left">Return</span>
+										<input type="text" class="input" id="date-return" readonly />
+									</div>
+									<div class="row">
+										<span class="left">Class</span>
+										<select class="input" id="class">
+											<option value="Economy">Economy</option>
+											<option value="Business">Business</option>
+											<option value="First">First</option>
+										</select>
+									</div>
+									<div class="row">
+										<span class="left">Seats</span>
+										<select class="input" id="seats">
+											<option value="1">1</option>
+											<option value="2">2</option>
+										</select>
+									</div>
 								</form>
 								<button id="button-search">Search</button>
-						  	</div>
-						  </div>
-					  </div>
-					  
+								</div>
+							</div>
+						</div>
+						
 					</div>
 				</div> <!-- search-form end -->
 
@@ -88,361 +88,69 @@
 								</div>
 							</div>
 						</figure>
-		  				<figure class="back">
-		  					<div id="map-display">
-		  						<div id="map-canvas"></div>
-		  					</div>
-		  				</figure>
+						<figure class="back">
+							<div id="map-display">
+								<div id="map-canvas"></div>
+							</div>
+						</figure>
 					</div>
 				</div> <!-- map end -->
 
 			</div> <!-- main end -->
 
-			<div id="results" class="card clearfix">
-				<!--<table id="results-table">
-					<thead>
-						<tr>
-							<th>From</th>
-							<th>To</th>
-							<th>Date</th>
-							<th>Departure</th>
-							<th>Arrival</th>
-							<th>Class</th>
-							<th>Price</th>
-							<th>Book</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>California</td>
-							<td>Massachusetts</td>
-							<td>2014-05-29</td>
-							<td>12:30 PM</td>
-							<td>17:30 PM</td>
-							<td>Economy</td>
-							<td>130 USD</td>
-							<td>BOOK BUTTON?</td>
-						</tr>
-						<tr>
-							<td>New Orleans, Luisiana</td>
-							<td>Massachusetts</td>
-							<td>2014-05-29</td>
-							<td>12:30 PM</td>
-							<td>18:30 PM</td>
-							<td>Economy</td>
-							<td>140 USD</td>
-							<td>BOOK BUTTON?</td>
-						</tr>
-					</tbody>
-				</table>-->
-			</div> <!-- results end -->
+			<div id="results" class="card clearfix"></div>
 
 			<!-- city guide -->
 			<div class="frontpage-city-guide card clearfix">
-			   <div class="frontpage-city-guide-inner">
-			      <div class="city-block-header">Visit popular USA flight destinations</div>
-			      <div class="city-blocks">
-			         <div class="city-block city-block-lasvegas load-images">
-			            <div class="city-name">Las Vegas</div>
-			            <div class="state-name">Nevada, USA</div>
-			         </div>
-			         <div class="city-block city-block-newyork load-images" >
-			            <div class="city-name">New York City</div>
-			            <div class="state-name">New York, USA</div>
-			         </div>
-			         <div class="city-block city-block-sanfrancisco load-images" >
-			            <div class="city-name">San Francisco</div>
-			            <div class="state-name">California, USA</div>
-			         </div>
-			         <div class="city-block city-block-chicago load-images" >
-			            <div class="city-name">Chicago</div>
-			            <div class="state-name">Illinois, USA</div>
-			         </div>
-			         <div class="city-block city-block-miami load-images" >
-			            <div class="city-name">Miami</div>
-			            <div class="state-name">Florida, USA</div>
-			         </div>
-			         <div class="city-block city-block-orlando hidden load-images" >
-			            <div class="city-name">Orlando</div>
-			            <div class="state-name">Florida, USA</div>
-			         </div>
-			         <div class="city-block city-block-losangeles load-images" >
-			            <div class="city-name">Los Angeles</div>
-			            <div class="state-name">California, USA</div>
-			         </div>
-			         <div class="city-block city-block-boston load-images" >
-			            <div class="city-name">Boston</div>
-			            <div class="state-name">Massachusetts, USA</div>
-			         </div>
-			         <div class="city-block city-block-seattle load-images" >
-			            <div class="city-name">Seattle</div>
-			            <div class="state-name">Washington, USA</div>
-			         </div>
-			         <div class="city-block city-block-denver load-images" >
-			            <div class="city-name">Denver</div>
-			            <div class="state-name">Colorado, USA</div>
-			         </div>
-			         <div id="expand-city-div">
-				         <div class="city-block city-block-atlanta hidden load-images" >
-				            <div class="city-name">Atlanta</div>
-				            <div class="state-name">Georgia, USA</div>
-				         </div>
-				         <div class="city-block city-block-austin hidden load-images" >
-				            <div class="city-name">Austin</div>
-				            <div class="state-name">Texas, USA</div>
-				         </div>
-				         <div class="city-block city-block-baltimore hidden load-images" >
-				            <div class="city-name">Baltimore</div>
-				            <div class="state-name">Maryland, USA</div>
-				         </div>
-				         <div class="city-block city-block-berkeley hidden  load-images" >
-				            <div class="city-name">Berkeley</div>
-				            <div class="state-name">California, USA</div>
-				         </div>
-				         <div class="city-block city-block-dallas hidden load-images" >
-				            <div class="city-name">Dallas</div>
-				            <div class="state-name">Texas, USA</div>
-				         </div>
-				         <div class="city-block city-block-detroit hidden load-images" >
-				            <div class="city-name">Detroit</div>
-				            <div class="state-name">Michigan, USA</div>
-				         </div>
-				         <div class="city-block city-block-fortlauderdale hidden load-images" >
-				            <div class="city-name">Fort Lauderdale</div>
-				            <div class="state-name">Florida, USA</div>
-				         </div>
-				         <div class="city-block city-block-houston hidden load-images" >
-				            <div class="city-name">Houston</div>
-				            <div class="state-name">Texas, USA</div>
-				         </div>
-				         <div class="city-block city-block-laketahoe hidden load-images" >
-				            <div class="city-name">Lake Tahoe</div>
-				            <div class="state-name">Nevada, USA</div>
-				         </div>
-				         <div class="city-block city-block-monterey hidden load-images" >
-				            <div class="city-name">Monterey</div>
-				            <div class="state-name">California, USA</div>
-				         </div>
-				         <div class="city-block city-block-napa hidden load-images" >
-				            <div class="city-name">Napa</div>
-				            <div class="state-name">California, USA</div>
-				         </div>
-			         
-				         <div class="city-block city-block-neworleans hidden load-images" >
-				            <div class="city-name">New Orleans</div>
-				            <div class="state-name">Louisiana, USA</div>
-				         </div>
-				         <div class="city-block city-block-oakland hidden load-images" >
-				            <div class="city-name">Oakland</div>
-				            <div class="state-name">California, USA</div>
-				         </div>
-				         <div class="city-block city-block-orangecounty hidden load-images" >
-				            <div class="city-name">Orange County</div>
-				            <div class="state-name">California, USA</div>
-				         </div>
-				         <div class="city-block city-block-philadelphia hidden load-images" >
-				            <div class="city-name">Philadelphia</div>
-				            <div class="state-name">Pennsylvania, USA</div>
-				         </div>
-				         <div class="city-block city-block-phoenix hidden load-images" >
-				            <div class="city-name">Phoenix</div>
-				            <div class="state-name">Arizona, USA</div>
-				         </div>
-				         <div class="city-block city-block-portland hidden load-images" >
-				            <div class="city-name">Portland</div>
-				            <div class="state-name">Oregon, USA</div>
-				         </div>
-				         <div class="city-block city-block-riverside hidden load-images" >
-				            <div class="city-name">Riverside</div>
-				            <div class="state-name">California, USA</div>
-				         </div>
-				         <div class="city-block city-block-saltlakecity hidden load-images" >
-				            <div class="city-name">Salt Lake City</div>
-				            <div class="state-name">Utah, USA</div>
-				         </div>
-				         <div class="city-block city-block-sanantonio hidden load-images" >
-				            <div class="city-name">San Antonio</div>
-				            <div class="state-name">Texas, USA</div>
-				         </div>
-				         <div class="city-block city-block-sandiego hidden load-images" >
-				            <div class="city-name">San Diego</div>
-				            <div class="state-name">California, USA</div>
-				         </div>
-				         <div class="city-block city-block-sanjose hidden load-images" >
-				            <div class="city-name">San Jose</div>
-				            <div class="state-name">California, USA</div>
-				         </div>
-				         <div class="city-block city-block-stpaul hidden load-images" >
-				            <div class="city-name">Minneapolis</div>
-				            <div class="state-name">Minnesota, USA</div>
-				         </div>
-				         <div class="city-block city-block-washingtondc hidden load-images" >
-				            <div class="city-name">Washington</div>
-				            <div class="state-name">District Of Columbia, USA</div>
-				         </div>
-			         </div>
-			      </div>
-			      <a class="expand-city-guide">Show more destinations</a>  
-			   </div>
+				<div class="frontpage-city-guide-inner">
+					<div class="city-block-header">Visit popular USA flight destinations</div>
+					<div class="city-blocks">
+						<div class="city-block city-block-lasvegas load-images">
+							<div class="city-name">Las Vegas</div>
+							<div class="state-name">Nevada, USA</div>
+						</div>
+						<div class="city-block city-block-newyork load-images" >
+							<div class="city-name">New York City</div>
+							<div class="state-name">New York, USA</div>
+						</div>
+						<div class="city-block city-block-sanfrancisco load-images" >
+							<div class="city-name">San Francisco</div>
+							<div class="state-name">California, USA</div>
+						</div>
+						<div class="city-block city-block-chicago load-images" >
+							<div class="city-name">Chicago</div>
+							<div class="state-name">Illinois, USA</div>
+						</div>
+						<div class="city-block city-block-miami load-images" >
+							<div class="city-name">Miami</div>
+							<div class="state-name">Florida, USA</div>
+						</div>
+						<div class="city-block city-block-orlando hidden load-images" >
+							<div class="city-name">Orlando</div>
+							<div class="state-name">Florida, USA</div>
+						</div>
+						<div class="city-block city-block-losangeles load-images" >
+							<div class="city-name">Los Angeles</div>
+							<div class="state-name">California, USA</div>
+						</div>
+						<div class="city-block city-block-boston load-images" >
+							<div class="city-name">Boston</div>
+							<div class="state-name">Massachusetts, USA</div>
+						</div>
+						<div class="city-block city-block-seattle load-images" >
+							<div class="city-name">Seattle</div>
+							<div class="state-name">Washington, USA</div>
+						</div>
+						<div class="city-block city-block-denver load-images" >
+							<div class="city-name">Denver</div>
+							<div class="state-name">Colorado, USA</div>
+						</div>
+						<div id="expand-city-div"></div>
+					</div>
+					<a class="expand-city-guide">Show more destinations</a>
+				</div>
 			</div> <!-- city guide end -->
-			
 		</div><!-- wrapper end -->
-
-		<div id="msform-container" class="hide">
-			<form id="msform">
-				<!-- progressbar -->
-				<ul id="progressbar">
-					<li class="active">Selected flight</li>
-					<li>Personal Details</li>
-					<li>Billing</li>
-					<li>Confirm Payment</li>
-				</ul>
-				<!-- fieldsets -->
-				<fieldset>
-					<h2 class="fs-title">Selected flight</h2>
-					<h3 class="fs-subtitle">Confirm that this is yours selected flight</h3>
-					<div class="price">100$</div>
-					<div class="routing-columns">
-						<div class="routing-column">
-							<div class="routing-description">
-								<div class="routing-codes">
-									<span class="fs-from">California</span>
-									<div class="arrow">
-										&#8203;
-										<div class="img"></div>
-									</div>
-									<span class="fs-to">New York</span>
-								</div>
-								<div class="date" id="fs-date">Fri, Jun 6</div>
-								<div class="duration">7h 40m</div>
-							</div>
-
-							<div class="routing-overview">
-								<div class="space-enforcer">
-									<div class="place"><span class="fs-from">California</span></div>
-									<div class="time" id="fs-time-1">Fri, 12:00 PM</div>
-								</div>
-								<div class="place"><span class="fs-to">New York</span></div>
-								<div class="time" id="fs-time-2">Fri, 4:40 PM</div>
-								<div class="summary-arrow"></div>
-							</div>
-						</div>
-						<div class="routing-column routing-column-right hide">
-							<div class="routing-description">
-								<div class="routing-codes">
-									<span class="fs-to">New York</span>
-									<div class="arrow">
-										&#8203;
-										<div class="img"></div>
-									</div>
-									<span class="fs-from">California</span>
-								</div>
-								<div class="date" id="fs-return-date">Sun, Jun 8</div>
-								<div class="duration">7h 20m</div>
-							</div>
-
-							<div class="routing-overview">
-								<div class="space-enforcer">
-									<div class="place"><span class="fs-to">New York</span></div>
-									<div class="time" id="fs-return-time-1">Sun, 14:00 PM</div>
-								</div>
-								<div class="place"><span class="fs-from">California</span></div>
-								<div class="time" id="fs-return-time-2">Sun, 6:20 PM</div>
-								<div class="summary-arrow"></div>
-							</div>
-						</div>
-					</div>
-					<div class="clearfix"></div>
-					<input type="button" name="next" class="next action-button" value="Next" />
-				</fieldset>
-				<fieldset>
-					<h2 class="fs-title">Personal Details</h2>
-					<h3 class="fs-subtitle">Passenger information</h3>
-					<div style="float: left;">Passenger 1</div>
-					<input type="text" name="fs-name1" id="fs-name1" placeholder="Full Name*" />
-					<input type="text" name="fs-birth1" id="fs-birth1" placeholder="Date of birth (dd/mm/yyyy)*" readonly required />
-					<input type="text" name="fs-phone1" placeholder="Phone" />
-					<div id="fs-second-passenger">
-						<div style="float: left;">Passenger 2</div>
-						<input type="text" name="fs-name2" id="fs-name2" placeholder="Full Name*" />
-						<input type="text" name="fs-birth2" id="fs-birth2" placeholder="Date of birth*" readonly required />
-						<input type="text" name="phone2" placeholder="Phone" />
-					</div>
-					<input type="button" name="previous" class="previous action-button" value="Previous" />
-					<input type="button" name="next" class="next action-button" value="Next" />
-				</fieldset>
-				<fieldset>
-					<h2 class="fs-title">Payment</h2>
-					<h3 class="fs-subtitle">Credit card details</h3>
-					<input style="width: 50%; margin-right: 5px;" type="text" name="cname" placeholder="Name" id="cc-name"/>
-					<input style="width: 20%; margin-right: 5px;" type="text" name="mm" placeholder="MM" id="cc-month" />
-					<input style="width: 20%;" type="text" name="yy" placeholder="YY" id="cc-year" />
-					<input style="width: 60%;" type="text" name="cc" placeholder="Credit card number" pattern="[0-9]{13,16}" required id="cc" />
-					<div class="cc-icon-container">
-						<div class="cc-generic" id="cc-image"></div>
-					</div>
-					<input style="width: 20%;" type="text" name="cvc" placeholder="CVC" id="cc-cvc" />
-					<input type="button" name="previous" class="previous action-button" value="Previous" />
-					<input type="button" name="next" class="next action-button" value="Next" />
-				</fieldset>
-				<fieldset>
-					<h2 class="fs-title">Confirm Payment</h2>
-					<h3 class="fs-subtitle">Please verify your details</h3>
-					<div class="routing-columns">
-						<div class="routing-column">
-							<div class="routing-description">
-								<div class="routing-codes">
-									<span class="fs-from">California</span>
-									<div class="arrow">
-										&#8203;
-										<div class="img"></div>
-									</div>
-									<span class="fs-to">New York</span>
-								</div>
-								<div class="time" id="fs-final-time-1">Fri, Jun 6, 12:00 PM</div>
-							</div>
-							<div class="routing-description hide" id="fs-final-return">
-								<div class="routing-codes">
-									<span class="fs-to">New York</span>
-									<div class="arrow">
-										&#8203;
-										<div class="img"></div>
-									</div>
-									<span class="fs-from">California</span>
-								</div>
-								<div class="time" id="fs-final-time-2">Fri, Jun 6, 12:00 PM</div>
-							</div>
-						</div>
-
-						<div class="routing-column routing-column-right">
-							<div class="fs-passenger-details">
-								<div id="fs-passenger-1">
-									<div class="fs-passenger-text">Passenger #1</div>
-									<div id="fs-passenger-info">
-										<div id="fs-passenger-1-name" class="fs-passenger-name">
-											Stefan Aleksovski
-										</div>
-										<div id="fs-passenger-1-birth" class="time">01/01/1993</div>
-									</div>
-								</div>
-								<div id="fs-passenger-2">
-									<div class="fs-passenger-text">Passenger #2</div>
-									<div id="fs-passenger-info">
-										<div id="fs-passenger-2-name" class="fs-passenger-name">
-											Maja Aleksovska
-										</div>
-										<div id="fs-passenger-2-birth" class="time">01/01/1993</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="clearfix"></div>
-					<div id="fs-to-pay"><span id="fs-final-price">$100</span> will be charged to your credit card.</div>
-					<input type="button" name="previous" class="previous action-button" value="Previous" />
-					<input type="submit" name="submit" class="submit action-button" value="Submit" />
-				</fieldset>
-			</form>
-		</div>
+		<div id="msform-container" class="hide"></div>
 	</body>
 </html>

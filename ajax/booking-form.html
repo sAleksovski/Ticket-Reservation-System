@@ -1,0 +1,152 @@
+<form id="msform">
+	<!-- progressbar -->
+	<ul id="progressbar">
+		<li class="active">Selected flight</li>
+		<li>Personal Details</li>
+		<li>Billing</li>
+		<li>Confirm Payment</li>
+	</ul>
+	<!-- fieldsets -->
+	<fieldset>
+		<h2 class="fs-title">Selected flight</h2>
+		<h3 class="fs-subtitle">Confirm that this is yours selected flight</h3>
+		<div class="price">100$</div>
+		<div class="routing-columns">
+			<div class="routing-column">
+				<div class="routing-description">
+					<div class="routing-codes">
+						<span class="fs-from">California</span>
+						<div class="arrow">
+							&#8203;
+							<div class="img"></div>
+						</div>
+						<span class="fs-to">New York</span>
+					</div>
+					<div class="date" id="fs-date">Fri, Jun 6</div>
+					<div class="duration">7h 40m</div>
+				</div>
+
+				<div class="routing-overview">
+					<div class="space-enforcer">
+						<div class="place"><span class="fs-from">California</span></div>
+						<div class="time" id="fs-time-1">Fri, 12:00 PM</div>
+					</div>
+					<div class="place"><span class="fs-to">New York</span></div>
+					<div class="time" id="fs-time-2">Fri, 4:40 PM</div>
+					<div class="summary-arrow"></div>
+				</div>
+			</div>
+			<div class="routing-column routing-column-right hide">
+				<div class="routing-description">
+					<div class="routing-codes">
+						<span class="fs-to">New York</span>
+						<div class="arrow">
+							&#8203;
+							<div class="img"></div>
+						</div>
+						<span class="fs-from">California</span>
+					</div>
+					<div class="date" id="fs-return-date">Sun, Jun 8</div>
+					<div class="duration">7h 20m</div>
+				</div>
+
+				<div class="routing-overview">
+					<div class="space-enforcer">
+						<div class="place"><span class="fs-to">New York</span></div>
+						<div class="time" id="fs-return-time-1">Sun, 14:00 PM</div>
+					</div>
+					<div class="place"><span class="fs-from">California</span></div>
+					<div class="time" id="fs-return-time-2">Sun, 6:20 PM</div>
+					<div class="summary-arrow"></div>
+				</div>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+		<input type="button" name="next" class="next action-button" value="Next" />
+	</fieldset>
+	<fieldset>
+		<h2 class="fs-title">Personal Details</h2>
+		<h3 class="fs-subtitle">Passenger information</h3>
+		<div style="float: left;">Passenger 1</div>
+		<input type="text" name="fs-name1" id="fs-name1" placeholder="Full Name*" />
+		<input type="text" name="fs-birth1" id="fs-birth1" placeholder="Date of birth (dd/mm/yyyy)*" readonly required />
+		<input type="text" name="fs-phone1" placeholder="Phone" />
+		<div id="fs-second-passenger">
+			<div style="float: left;">Passenger 2</div>
+			<input type="text" name="fs-name2" id="fs-name2" placeholder="Full Name*" />
+			<input type="text" name="fs-birth2" id="fs-birth2" placeholder="Date of birth*" readonly required />
+			<input type="text" name="phone2" placeholder="Phone" />
+		</div>
+		<input type="button" name="previous" class="previous action-button" value="Previous" />
+		<input type="button" name="next" class="next action-button" value="Next" />
+	</fieldset>
+	<fieldset>
+		<h2 class="fs-title">Payment</h2>
+		<h3 class="fs-subtitle">Credit card details</h3>
+		<input style="width: 50%; margin-right: 5px;" type="text" name="cname" placeholder="Name" id="cc-name"/>
+		<input style="width: 20%; margin-right: 5px;" type="text" name="mm" placeholder="MM" id="cc-month" />
+		<input style="width: 20%;" type="text" name="yy" placeholder="YY" id="cc-year" />
+		<input style="width: 60%;" type="text" name="cc" placeholder="Credit card number" pattern="[0-9]{13,16}" required id="cc" />
+		<div class="cc-icon-container">
+			<div class="cc-generic" id="cc-image"></div>
+		</div>
+		<input style="width: 20%;" type="text" name="cvv" placeholder="CVV" id="cc-cvv" />
+		<input type="button" name="previous" class="previous action-button" value="Previous" />
+		<input type="button" name="next" class="next action-button" value="Next" />
+	</fieldset>
+	<fieldset>
+		<h2 class="fs-title">Confirm Payment</h2>
+		<h3 class="fs-subtitle">Please verify your details</h3>
+		<div class="routing-columns">
+			<div class="routing-column">
+				<div class="routing-description">
+					<div class="routing-codes">
+						<span class="fs-from">California</span>
+						<div class="arrow">
+							&#8203;
+							<div class="img"></div>
+						</div>
+						<span class="fs-to">New York</span>
+					</div>
+					<div class="time" id="fs-final-time-1">Fri, Jun 6, 12:00 PM</div>
+				</div>
+				<div class="routing-description hide" id="fs-final-return">
+					<div class="routing-codes">
+						<span class="fs-to">New York</span>
+						<div class="arrow">
+							&#8203;
+							<div class="img"></div>
+						</div>
+						<span class="fs-from">California</span>
+					</div>
+					<div class="time" id="fs-final-time-2">Fri, Jun 6, 12:00 PM</div>
+				</div>
+			</div>
+
+			<div class="routing-column routing-column-right">
+				<div class="fs-passenger-details">
+					<div id="fs-passenger-1">
+						<div class="fs-passenger-text">Passenger #1</div>
+						<div id="fs-passenger-info">
+							<div id="fs-passenger-1-name" class="fs-passenger-name">
+							</div>
+							<div id="fs-passenger-1-birth" class="time">01/01/1993</div>
+						</div>
+					</div>
+					<div id="fs-passenger-2">
+						<div class="fs-passenger-text">Passenger #2</div>
+						<div id="fs-passenger-info">
+							<div id="fs-passenger-2-name" class="fs-passenger-name">
+							</div>
+							<div id="fs-passenger-2-birth" class="time">01/01/1993</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+		<div id="fs-to-pay"><span id="fs-final-price">$100</span> will be charged to your credit card.</div>
+		<input type="button" name="previous" class="previous action-button" value="Previous" />
+		<input type="submit" name="submit" class="submit action-button" value="Submit" />
+	</fieldset>
+</form>
