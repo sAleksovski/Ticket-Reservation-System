@@ -211,14 +211,16 @@ $(function() {
 		minDate: 0,
 		maxDate: "+1Y",
 		onClose: function () {
-			$("#date").removeClass("error");
 			var seldate = $(this).datepicker('getDate');
-	        seldate = seldate.toDateString();
-	        seldate = seldate.split(' ');
-	        d = seldate[0] + ", " + seldate[1] + " " + seldate[2];
-	        $("#fs-date").html(d);
-	        $("#fs-time-1").html(seldate[0] + ", ");
-	        $("#fs-time-2").html(seldate[0] + ", ");
+			if( !isEmpty(seldate)) {
+				$("#date").removeClass("error");
+		        seldate = seldate.toDateString();
+		        seldate = seldate.split(' ');
+		        d = seldate[0] + ", " + seldate[1] + " " + seldate[2];
+		        $("#fs-date").html(d);
+		        $("#fs-time-1").html(seldate[0] + ", ");
+		        $("#fs-time-2").html(seldate[0] + ", ");
+	    	}
 		}
 	});
 	$("#date-return").datepicker({
@@ -239,13 +241,13 @@ $(function() {
 	$("#fs-birth1").datepicker({
       	changeMonth: true,
       	changeYear: true,
-      	yearRange:'-100:+0'
+      	yearRange:'-100:-6'
     });
 
     $("#fs-birth2").datepicker({
       	changeMonth: true,
       	changeYear: true,
-      	yearRange:'-100:+0'
+      	yearRange:'-100:-6'
     });
 
 	$( "#link-second-tab" ).click(function() {
@@ -579,12 +581,11 @@ function isBookingValidated() {
 	};
 	if (! $('#progressbar li:nth-child(3)').hasClass('active')) {
 		ok = true;
-		var patt = new RegExp("^[a-z ,.'-]+$");
+		var patt = new RegExp("^[a-zA-Z ,.'-]+$");
 		if(!patt.test($('#fs-name1').val())){
 			$('#fs-name1').addClass('error');
 			ok = false;
 		}
-		var patt2 = new RegExp("^[0-9]{2}/[0-9]{2}/[0-9]{4}/$");
 		if($('#fs-birth1').val() === "") {
 			$('#fs-birth1').addClass('error');
 			ok = false;
@@ -605,7 +606,7 @@ function isBookingValidated() {
 	};
 	if (! $('#progressbar li:nth-child(4)').hasClass('active')) {
 		ok = true;
-		var patt = new RegExp("^[a-z ,.'-]+$");
+		var patt = new RegExp("^[a-zA-Z ,.'-]+$");
 		if(!patt.test($('#cc-name').val())) {
 			$('#cc-name').addClass('error');
 			ok = false;
@@ -624,7 +625,7 @@ function isBookingValidated() {
 			$('#cc').addClass('error');
 			ok = false;
 		}
-		patt = new RegExp("^[0-9]{3}$")
+		patt = new RegExp("^[0-9]{3,4}$")
 		if(!patt.test($('#cc-cvc').val())){
 			$('#cc-cvc').addClass('error');
 			ok = false;
