@@ -239,6 +239,7 @@ function initSearchForm() {
 	$("#date").datepicker({
 		minDate: 0,
 		maxDate: "+1Y",
+		dateFormat: "dd/mm/yy",
 		onClose: function () {
 			var seldate = $(this).datepicker('getDate');
 			if( !isEmpty(seldate)) {
@@ -249,6 +250,7 @@ function initSearchForm() {
 	$("#date-return").datepicker({
 		minDate: 0,
 		maxDate: "+1Y",
+		dateFormat: "dd/mm/yy",
 		onClose: function () {
 			var seldate = $(this).datepicker('getDate');
 			if( !isEmpty(seldate)) {
@@ -450,6 +452,7 @@ function initBooking() {
 		changeYear: true,
 		yearRange:'-100:-6',
 		defaultDate: "02/10/1994",
+		dateFormat: "dd/mm/yy",
 		onClose: function() {
 			$('#fs-birth1').removeClass('error');
 			var b = $(this).datepicker('getDate');
@@ -466,6 +469,7 @@ function initBooking() {
 		changeYear: true,
 		yearRange:'-100:-6',
 		defaultDate: "02/10/1994",
+		dateFormat: "dd/mm/yy",
 		onClose: function() {
 			$('#fs-birth2').removeClass('error');
 			var b = $(this).datepicker('getDate');
@@ -570,7 +574,7 @@ function calculateDuration(time1, time2) {
 		mDurr = mTo - mFrom;
 		hDurr = hTo - hFrom;
 	}
-	return (hDurr < 10 ? "0" : "") + hDurr + "h " + (mDurr < 10 ? "0" : "") + mDurr + "m";
+	return hDurr + "h " + mDurr + "m";
 }
 
 function tdClick(element){
