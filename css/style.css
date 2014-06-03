@@ -333,11 +333,11 @@ header {
 }
 
 #results-table thead th:first-child {
-    border-radius: 6px 0 0 0;
+    border-radius: 6px 0 0 6px;
 }
 
-#results-table thead th:last-child {
-    border-radius: 0 6px 0 0;
+#results-table thead th:nth-last-child(2) {
+    border-radius: 0 6px 6px 0;
 }
 
 #results-table tbody tr:hover {

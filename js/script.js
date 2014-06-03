@@ -131,7 +131,7 @@ function initSearchForm() {
 	$("input[type=text]").val("");
 
 	$("#date-return-div").hide();
-	//$("#results").hide();
+	$("#results").hide();
 
 	var viewMoreOpen = false;
 
@@ -508,12 +508,12 @@ function search() {
 	}
 	else {
 		table = "<div class=\"sort-by-container\"><span>Sort by:</span><ul class=\"sort-by-list\"><li class=\"selected\" id=\"sort-by-price\">Price</li><li id=\"sort-by-departure\">Departure</li><li id=\"sort-by-arrival\">Arrival</li><li id=\"sort-by-duration\">Duration</li></ul></div>";
-		table += "<table id=\"results-table\"><thead><tr><th>From</th><th>To</th><th>Date Depart</th>" + (isEmpty($("#date-return").val()) ? "" :  "<th>Date Return</th>") +"<th>Departure</th><th>Arrival</th><th>Class</th><th>Price</th><th>Book</th></tr></thead><tbody>";
+		table += "<table id=\"results-table\"><thead><tr><th>From</th><th>To</th><th>Date Depart</th>" + (isEmpty($("#date-return").val()) ? "" :  "<th>Date Return</th>") +"<th>Departure</th><th>Arrival</th><th>Class</th><th>Price</th><th>Book</th><th class=\"hide\">Duration</th></tr></thead><tbody>";
 		var n = generateRandom(3, 9);
 		for (var i = 0; i < n; i++) {
 			var hour = (generateRandom(0, 12) + 27 * i) % 12;
 			var min = (generateRandom(0, 60) + 27 * i) % 60;
-			min = Math.round(min / 5) * 5;
+			min =(Math.round(min / 5) * 5) % 60;
 			var timeFrom = (hour < 10 ? "0" : "") + hour + ":" + (min < 10 ? "0" : "") + min + " AM";
 			
 			hour = (generateRandom(0, 12) + 27 * (n - i)) % 12;
@@ -530,7 +530,7 @@ function search() {
 
 			var row = "<tr><td class=\"td-from\">" + $("#from").val() + "</td><td class=\"td-to\">" + $("#to").val() + "</td><td class=\"td-date-depart\">"
 			+ $("#date").val() + "</td>" + (isEmpty($("#date-return").val()) ? "" : ("<td class=\"td-date-return\">" + $("#date-return").val() + "</td>")) + "<td class=\"td-time-start\">" + timeFrom + "</td><td class=\"td-time-end\">" + timeArr + "</td><td class=\"td-class\">" + $( "#class option:selected" ).text()
-			+ "</td><td class=\"td-price\">" + "$" + price +"</td><td>" + "<button onclick=\"tdClick(this)\">Book</button>" + "</td><td>" + calculateDurationMinutes(timeFrom, timeArr) + "</td></tr>";
+			+ "</td><td class=\"td-price\">" + "$" + price +"</td><td>" + "<button onclick=\"tdClick(this)\">Book</button>" + "</td><td class=\"hide\">" + calculateDurationMinutes(timeFrom, timeArr) + "</td></tr>";
 			table += row;
 		};
 		table += "</tbody></table>";
@@ -577,6 +577,9 @@ function search() {
 			$('.sort-by-list li').removeClass('selected');
 			$(this).addClass('selected');
 			var sorting = [[3,0]]; 
+			if ($("#date-return").is(":visible")){
+				sorting = [[4,0]]; 
+			};
 			// sort on the first column 
 			$("#results-table").trigger("sorton",[sorting]); 
 			// return false to stop default link action 
@@ -586,6 +589,9 @@ function search() {
 			$('.sort-by-list li').removeClass('selected');
 			$(this).addClass('selected');
 			var sorting = [[4,0]]; 
+			if ($("#date-return").is(":visible")){
+				sorting = [[5,0]]; 
+			};
 			// sort on the first column 
 			$("#results-table").trigger("sorton",[sorting]); 
 			// return false to stop default link action 
@@ -644,7 +650,6 @@ function calculateDurationMinutes(time1, time2) {
 	var res = calculateDuration(time1, time2);
 	var h = parseInt(res.split('h')[0]);
 	var m = parseInt(res.split(' ')[1].split('m')[0]);
-	alert(h);
 	return 60*h + m;
 }
 
