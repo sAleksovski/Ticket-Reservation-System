@@ -28,7 +28,8 @@ function initialize() {
 			if (status == google.maps.GeocoderStatus.OK && results[1]) {
 				// user clicked on US and return result is in accepted format
 				if(results[1].address_components[results[1].address_components.length - 1].short_name == "US" &&
-					results[1].address_components[results[1].address_components.length - 2].short_name != "US") {
+					results[1].address_components[results[1].address_components.length - 2].short_name != "US" &&
+					contains(results[1].address_components[results[1].address_components.length - 2].long_name)) {
 
 					//Fill #from field
 					if (markerFrom == null) {
@@ -400,8 +401,8 @@ function initBooking() {
 		});
 	});
 
-	$(".submit").click(function(){
-		return false;
+	$(".finish").click(function(){
+		$("#msform-container").addClass('hide');
 	});
 
 	$("#msform-container").click(function(e){
@@ -714,6 +715,7 @@ function tdClick(element){
 		$('#fs-final-time-2').html($('#fs-return-date').html() + ti[1]);
 
 		$('#fs-final-price').html(p);
+		$('.success-num').html(Math.floor((Math.random() * 100000) + 10000))
 
 		$('fieldset input[type=text]').val("");
 		$("#msform-container").removeClass('hide');

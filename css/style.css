@@ -970,3 +970,29 @@ header {
 	font-size: 16px;
 }
 /* Booking CSS end */
+
+/* Success form */
+.success-header {
+	margin-top: 10px;
+	font-family: Open Sans Condensed;
+	font-weight: bold;
+	font-size: 24px;
+}
+
+.success-text {
+	margin-top: 10px;
+	font-family: Open Sans Condensed;
+	font-size: 14px; 
+}
+
+.success-highlight {
+	color: #27AE60;
+}
+
+.success-num {
+	margin-top: 15px;
+	margin-bottom: 15px;
+	font-family: Open Sans Condensed;
+	font-size: 30px;
+}
+/* Success form end*/
