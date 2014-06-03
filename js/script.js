@@ -98,7 +98,8 @@ function drawPath () {
 // remove marker from map and set null the marker
 function removeMarker (marker) {
 	marker.setMap(null);
-	flightPath.setMap(null);
+	if(flightPath != null)
+		flightPath.setMap(null);
 	if(marker == markerFrom) {
 		$("#from").val("");
 		markerFrom = null;
