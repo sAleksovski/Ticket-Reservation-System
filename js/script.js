@@ -131,7 +131,7 @@ function initSearchForm() {
 	$("input[type=text]").val("");
 
 	$("#date-return-div").hide();
-	$("#results").hide();
+	//$("#results").hide();
 
 	var viewMoreOpen = false;
 
@@ -451,7 +451,7 @@ function initBooking() {
 		changeMonth: true,
 		changeYear: true,
 		yearRange:'-100:-6',
-		defaultDate: "02/10/1994",
+		defaultDate: "10/02/1994",
 		dateFormat: "dd/mm/yy",
 		onClose: function() {
 			$('#fs-birth1').removeClass('error');
@@ -468,7 +468,7 @@ function initBooking() {
 		changeMonth: true,
 		changeYear: true,
 		yearRange:'-100:-6',
-		defaultDate: "02/10/1994",
+		defaultDate: "10/01/1993",
 		dateFormat: "dd/mm/yy",
 		onClose: function() {
 			$('#fs-birth2').removeClass('error');
@@ -507,7 +507,8 @@ function search() {
 		table = "<div id=\"no-results\">No flights found that meet your criteria.</div>"
 	}
 	else {
-		table = "<table id=\"results-table\"><thead><tr><th>From</th><th>To</th><th>Date Depart</th>" + (isEmpty($("#date-return").val()) ? "" :  "<th>Date Return</th>") +"<th>Departure</th><th>Arrival</th><th>Class</th><th>Price</th><th>Book</th></tr></thead><tbody>";
+		table = "<div class=\"sort-by-container\"><span>Sort by:</span><ul class=\"sort-by-list\"><li class=\"selected\" id=\"sort-by-price\">Price</li><li id=\"sort-by-departure\">Departure</li><li id=\"sort-by-arrival\">Arrival</li><li id=\"sort-by-duration\">Duration</li></ul></div>";
+		table += "<table id=\"results-table\"><thead><tr><th>From</th><th>To</th><th>Date Depart</th>" + (isEmpty($("#date-return").val()) ? "" :  "<th>Date Return</th>") +"<th>Departure</th><th>Arrival</th><th>Class</th><th>Price</th><th>Book</th></tr></thead><tbody>";
 		var n = generateRandom(3, 9);
 		for (var i = 0; i < n; i++) {
 			var hour = (generateRandom(0, 12) + 27 * i) % 12;
@@ -529,7 +530,7 @@ function search() {
 
 			var row = "<tr><td class=\"td-from\">" + $("#from").val() + "</td><td class=\"td-to\">" + $("#to").val() + "</td><td class=\"td-date-depart\">"
 			+ $("#date").val() + "</td>" + (isEmpty($("#date-return").val()) ? "" : ("<td class=\"td-date-return\">" + $("#date-return").val() + "</td>")) + "<td class=\"td-time-start\">" + timeFrom + "</td><td class=\"td-time-end\">" + timeArr + "</td><td class=\"td-class\">" + $( "#class option:selected" ).text()
-			+ "</td><td class=\"td-price\">" + "$" + price +"</td><td>" + "<button onclick=\"tdClick(this)\">Book</button>" + "</td></tr>";
+			+ "</td><td class=\"td-price\">" + "$" + price +"</td><td>" + "<button onclick=\"tdClick(this)\">Book</button>" + "</td><td>" + calculateDurationMinutes(timeFrom, timeArr) + "</td></tr>";
 			table += row;
 		};
 		table += "</tbody></table>";
@@ -539,8 +540,70 @@ function search() {
 		textExtraction: function(node){ 
 		// for numbers formattted like $1,000.50 e.g. English
 			return $(node).text().replace(/[,$£€]/g,'');
-		}
-	})}, 2100);
+		},
+		headers: {
+			0: { sorter: false },
+			1: { sorter: false },
+			2: { sorter: false },
+			3: { sorter: false },
+			4: { sorter: false },
+			5: { sorter: false },
+			6: { sorter: false },
+			7: { sorter: false },
+			8: { sorter: false }
+		},
+		sortList: [[6,0]]
+	});
+		var sorting = [[6,0]];
+		if ($("#date-return").is(":visible")){
+			sorting = [[7,0]]; 
+		};
+		$("#results-table").trigger("sorton",[sorting]); 
+	}, 2100);
+	setTimeout(function(){
+		$('#sort-by-price').click(function() {
+			$('.sort-by-list li').removeClass('selected');
+			$(this).addClass('selected');
+			var sorting = [[6,0]]; 
+			if ($("#date-return").is(":visible")){
+				sorting = [[7,0]]; 
+			};
+			// sort on the first column 
+			$("#results-table").trigger("sorton",[sorting]); 
+			// return false to stop default link action 
+			return false; 
+		});
+		$('#sort-by-departure').click(function() {
+			$('.sort-by-list li').removeClass('selected');
+			$(this).addClass('selected');
+			var sorting = [[3,0]]; 
+			// sort on the first column 
+			$("#results-table").trigger("sorton",[sorting]); 
+			// return false to stop default link action 
+			return false; 
+		});
+		$('#sort-by-arrival').click(function() {
+			$('.sort-by-list li').removeClass('selected');
+			$(this).addClass('selected');
+			var sorting = [[4,0]]; 
+			// sort on the first column 
+			$("#results-table").trigger("sorton",[sorting]); 
+			// return false to stop default link action 
+			return false; 
+		});
+		$('#sort-by-duration').click(function() {
+			$('.sort-by-list li').removeClass('selected');
+			$(this).addClass('selected');
+			var sorting = [[8,0]];
+			if ($("#date-return").is(":visible")){
+				sorting = [[9,0]]; 
+			};
+			// sort on the first column 
+			$("#results-table").trigger("sorton",[sorting]); 
+			// return false to stop default link action 
+			return false; 
+		});
+	}, 2050);
 }
 
 function generateRandom(from, to) {
@@ -574,7 +637,15 @@ function calculateDuration(time1, time2) {
 		mDurr = mTo - mFrom;
 		hDurr = hTo - hFrom;
 	}
-	return hDurr + "h " + mDurr + "m";
+	return hDurr + "h " + (mDurr < 10 ? "0" : "") + mDurr + "m";
+}
+
+function calculateDurationMinutes(time1, time2) {
+	var res = calculateDuration(time1, time2);
+	var h = parseInt(res.split('h')[0]);
+	var m = parseInt(res.split(' ')[1].split('m')[0]);
+	alert(h);
+	return 60*h + m;
 }
 
 function tdClick(element){

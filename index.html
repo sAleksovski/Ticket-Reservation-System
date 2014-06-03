@@ -98,7 +98,55 @@
 
 			</div> <!-- main end -->
 
-			<div id="results" class="card clearfix"></div>
+			<div id="results" class="card clearfix">
+				<div class="sort-by-container">
+					<span>Sort by:</span>
+					<ul class="sort-by-list">
+						<li class="selected" id="sort-by-price">Price</li>
+						<li id="sort-by-departure">Departure</li>
+						<li id="sort-by-arrival">Arrival</li>
+						<li id="sort-by-duration">Duration</li>
+					</ul>
+				</div>
+				<table id="results-table">
+					<thead>
+						<tr>
+							<th>From</th>
+							<th>To</th>
+							<th>Date</th>
+							<th>Departure</th>
+							<th>Arrival</th>
+							<th>Class</th>
+							<th>Price</th>
+							<th>Book</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>California</td>
+							<td>Massachusetts</td>
+							<td>2014-05-29</td>
+							<td>12:30 PM</td>
+							<td>17:30 PM</td>
+							<td>Economy</td>
+							<td>130 USD</td>
+							<td>BOOK BUTTON?</td>
+							<td style="display: none;">RANDOM</td>
+						</tr>
+						<tr>
+							<td>New Orleans, Luisiana</td>
+							<td>Massachusetts</td>
+							<td>2014-05-29</td>
+							<td>12:30 PM</td>
+							<td>18:30 PM</td>
+							<td>Economy</td>
+							<td>140 USD</td>
+							<td>BOOK BUTTON?</td>
+							<td style="display: none;">RANDOM</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 
 			<!-- city guide -->
 			<div class="frontpage-city-guide card clearfix">
