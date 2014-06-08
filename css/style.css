@@ -1,5 +1,3 @@
-@import url(http://fonts.googleapis.com/css?family=Montserrat);
-
 * {
 	margin: 0;
 }
@@ -11,7 +9,7 @@ body {
   font-weight: normal;
   line-height: 20px;
   color: #444444;
-  background-color: #e5e5e5;
+  background-color: #F3F6F8;
 }
 
 #wrapper {
@@ -39,7 +37,7 @@ header {
   margin: 10px 0 20px 0;
   background-color: #ffffff;
   border: 1px solid #d8d8d8;
-  border-top-width: 0;
+  border-top-width: 1px;
   border-bottom-width: 2px;
   -webkit-border-radius: 3px;
      -moz-border-radius: 3px;
@@ -359,7 +357,7 @@ header {
 	font-family: 'Open Sans Condensed', sans-serif;
 	font-size: 32px;
 	font-weight: bold;
-	margin: 40px 0;
+	margin: 20px 0px 40px 0px;
 	text-align: center;
 	
 }
@@ -421,9 +419,10 @@ header {
 	line-height: 22px;
 	padding-top: 4px;
 }
-.frontpage-city-guide .frontpage-city-guide-inner .expand-city-guide
+.frontpage-city-guide .frontpage-city-guide-inner 
 {
-	margin-left: 20px;
+	text-align: center; 
+	/*margin-left: 20px;*/
 	font-size: 18px;
 }
 
@@ -546,6 +545,8 @@ header {
 
 .error {
 	border: 1px solid red !important;
+	box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.4);
+
 }
 
 #no-results {
@@ -687,7 +688,7 @@ header {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background-color: rgba(204, 204, 204, .9);
+	background-color: rgba(204, 204, 204, .95);
 }
 
 #msform {
@@ -722,10 +723,11 @@ header {
 	margin-bottom: 10px;
 	width: 100%;
 	box-sizing: border-box;
-	font-family: montserrat;
+	/*font-family: montserrat;*/
 	color: #2C3E50;
 	font-size: 13px;
 }
+
 /*buttons*/
 #msform .action-button {
 	width: 100px;

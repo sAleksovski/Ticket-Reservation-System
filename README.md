@@ -5,7 +5,7 @@ Demo Ticket Reservation System using Google Maps API for choosing and displaying
 --- 
 
 TO-DO List
-> - [ ] Add error messages in validation
+> - [x] Add error messages in validation
 > - [x] Payment dialog/page 
 > - [x] Confirm dialog/page
 > - [ ] Review user interface 

@@ -4,6 +4,7 @@ var markerFrom;
 var markerTo;
 var myLatlng;
 var flightPath;
+var isInvalid = false;
 
 // handling user click on map and initializing map
 function initialize() {
@@ -39,7 +40,7 @@ function initialize() {
 							title: "Click to remove"
 						});
 						$("#from").val(results[1].address_components[results[1].address_components.length - 2].long_name);
-						$("#from").removeClass("error");
+						//$("#from").removeClass("error");
 
 						google.maps.event.addListener(markerFrom, 'click', function() {
 							removeMarker(markerFrom);
@@ -58,7 +59,7 @@ function initialize() {
 							title: "Click to remove"
 						});
 						$("#to").val(results[1].address_components[results[1].address_components.length - 2].long_name);
-						$("#to").removeClass("error");
+						//$("#to").removeClass("error");
 
 						google.maps.event.addListener(markerTo, 'click', function() {
 							removeMarker(markerTo);
@@ -68,6 +69,8 @@ function initialize() {
 							drawPath();
 						};
 					}
+					if(isInvalid)
+						$("#search-form-1").valid();
 				}
 			}
 		});
@@ -238,15 +241,84 @@ function initSearchForm() {
 		};
 	});
 
+	$("input[type=text]").focusin(function() {
+		if($(this).hasClass("error"))
+			$(this).removeClass("error");
+   		$(this).tooltip('hide');
+	});
+
+	jQuery.validator.addMethod("validState", function(value, element) {
+    	return this.optional(element) || contains(value);
+	}, "Please enter valid USA state");
+
+	jQuery.validator.addMethod("sameState", function(value, element) {
+    	return this.optional(element) || ($("#to").val() != $("#from").val());
+	}, "You cannot choose same state twice");
+
+	jQuery.validator.addMethod("optional", function(value, element) {
+    	return !$("#date-return").is(":visible") || !isEmpty($("#date-return").val());
+	}, "Please choose return date");
+
+	jQuery.validator.addMethod("dateCheck", function(value, element) {
+    	return this.optional(element)  || $("#date").datepicker("getDate") <= $("#date-return").datepicker("getDate");
+	}, "Please choose return date after departure date");
+
+	$("#search-form-1").validate({
+		rules: {
+			from: {
+				required: true,
+				validState: true,
+				sameState: true
+			},
+			to: {
+				required: true,
+				validState: true,
+				sameState: true
+			},
+			date: {
+				required: true
+			},
+			'date-return': {
+				optional: true,
+				dateCheck: true
+			}
+
+		},
+		messages: {
+			from: {
+				required: "Please enter USA state",
+			},
+			to: {
+				required: "Please enter USA state",
+				validState: "Please enter valid USA state"
+			},
+			date: {
+				required: "Please choose departure date"
+			}
+		},
+		errorClass: "error",
+		onfocusout: false,
+
+		tooltip_options: {
+				from: {animation: true,  placement: 'right'},
+				to: { placement: 'right' },
+				date: { placement: 'right' },
+				'date-return': {placement: 'right' }
+		}
+	});
+
+
 	$("#date").datepicker({
 		minDate: 0,
 		maxDate: "+1Y",
 		dateFormat: "dd/mm/yy",
 		onClose: function () {
 			var seldate = $(this).datepicker('getDate');
-			if( !isEmpty(seldate)) {
+			/*if( !isEmpty(seldate)) {
 				$("#date").removeClass("error");
-			}
+			}*/
+			if(isInvalid)
+				$("#search-form-1").valid();
 		}
 	});
 	$("#date-return").datepicker({
@@ -258,9 +330,10 @@ function initSearchForm() {
 			if( !isEmpty(seldate)) {
 				$("#date-return").removeClass("error");
 			}
+			if(isInvalid)
+				$("#search-form-1").valid();
 		}
 	});
-
 
 	$( "#link-second-tab" ).click(function() {
 		$("#date-return-div").show();
@@ -275,7 +348,8 @@ function initSearchForm() {
 	});
 
 	$("#button-search").click(function() {
-		if (isInvalidForm()) {
+		if ( !$("#search-form-1").valid()) {
+			isInvalid = true;
 			return;
 		};
 		search();
@@ -532,7 +606,7 @@ function search() {
 
 			var row = "<tr><td class=\"td-from\">" + $("#from").val() + "</td><td class=\"td-to\">" + $("#to").val() + "</td><td class=\"td-date-depart\">"
 			+ $("#date").val() + "</td>" + (isEmpty($("#date-return").val()) ? "" : ("<td class=\"td-date-return\">" + $("#date-return").val() + "</td>")) + "<td class=\"td-time-start\">" + timeFrom + "</td><td class=\"td-time-end\">" + timeArr + "</td><td class=\"td-class\">" + $( "#class option:selected" ).text()
-			+ "</td><td class=\"td-price\">" + "$" + price +"</td><td>" + "<button onclick=\"tdClick(this)\">Book</button>" + "</td><td class=\"hide\">" + calculateDurationMinutes(timeFrom, timeArr) + "</td></tr>";
+			+ "</td><td class=\"td-price\">" + "$" + price +"</td><td>" + "<button class='btn btn-primary' onclick=\"tdClick(this)\">Book</button>" + "</td><td class=\"hide\">" + calculateDurationMinutes(timeFrom, timeArr) + "</td></tr>";
 			table += row;
 		};
 		table += "</tbody></table>";
@@ -724,7 +798,7 @@ function tdClick(element){
 }
 
 // Validation
-function isInvalidForm() {
+/*function isInvalidForm() {
 	var isInvalid = false;
 	var to = $("#to").val();
 	var from = $("#from").val();
@@ -749,7 +823,7 @@ function isInvalidForm() {
 	};
 
 	return isInvalid;
-}
+}*/
 
 function isBookingValidated() {
 	if (! $('#progressbar li:nth-child(2)').hasClass('active')) {
