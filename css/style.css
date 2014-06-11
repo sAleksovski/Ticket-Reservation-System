@@ -185,8 +185,6 @@ header {
 
 .ad-card-text {
 	height: 50px;
-	background-color: #ffffff;
-	opacity: 0.8;
 	padding: 20px;
 	border-radius: 5px;
 	margin-top: -90px;
@@ -907,39 +905,31 @@ header {
 	display: inline-block;
 }
 
-.cc-generic {
+.cc-generic, .cc-amex, .cc-maestro, .cc-mastercard, .cc-visa {
 	width: 51px;
 	height: 31px;
 	margin-top: 13px;
-	background-image: url('../images/cc/generic.png');
+	background-image: url('../images/cc.png');
+}
+
+.cc-generic {
+	background-position: 0 -31px;
 }
 
 .cc-amex {
-	width: 51px;
-	height: 31px;
-	margin-top: 13px;
-	background-image: url('../images/cc/amex.png');
+	background-position: 0 0;
 }
 
 .cc-maestro {
-	width: 51px;
-	height: 31px;
-	margin-top: 13px;
-	background-image: url('../images/cc/maestro.png');
+	background-position: 0 -62px;
 }
 
 .cc-mastercard {
-	width: 51px;
-	height: 31px;
-	margin-top: 13px;
-	background-image: url('../images/cc/mastercard.png');
+	background-position: 0 -93px;
 }
 
 .cc-visa {
-	width: 51px;
-	height: 31px;
-	margin-top: 13px;
-	background-image: url('../images/cc/visa.png');
+	background-position: 0 -124px;
 }
 
 #cc:invalid {

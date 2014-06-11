@@ -115,11 +115,9 @@ function removeMarker (marker) {
 
 function flip (addClass) {
 	if (addClass) {
-		$(".ad-card-text").css("opacity", "1.0");
 		$("#flip-card").addClass('flipped');
 	} else {
 		$("#flip-card").removeClass('flipped');
-		setTimeout(function(){$(".ad-card-text").css("opacity", "0.8")}, 1000);
 	};
 }
 
@@ -363,7 +361,7 @@ function initSearchForm() {
 	});
 }
 
-function initCityGuide() {
+function initCityGuideShow(){
 	$(".city-block").click(function() {
 		var string = $(this).find(".state-name").html();
 		string = string.substring(0, string.length - 5);
@@ -377,6 +375,10 @@ function initCityGuide() {
 		keyEvent.keyCode = $.ui.keyCode.ENTER; // event for pressing the "enter" key
 		$("#to").trigger(keyEvent); 
 	});
+}
+
+function initCityGuide() {
+	initCityGuideShow();
 	var viewMoreOpen = false;
 	$(".expand-city-guide").click(function() {
 		if(viewMoreOpen) {
@@ -388,6 +390,7 @@ function initCityGuide() {
 				$("#expand-city-div").load( "ajax/city-guide.html", function() {
 					$("#expand-city-div").find("div").removeClass("hidden");
 					$(".expand-city-guide").html("Show less destionations");
+					initCityGuideShow();
 				});
 			} else {
 				$("#expand-city-div").find("div").removeClass("hidden");
