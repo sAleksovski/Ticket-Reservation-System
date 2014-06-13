@@ -37,6 +37,7 @@
 }
 .tooltip-inner {
   max-width: 200px;
+  white-space:pre;
   padding: 3px 8px;
   color: #ffffff;
   text-align: center;

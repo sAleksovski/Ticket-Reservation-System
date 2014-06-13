@@ -296,7 +296,6 @@ function initSearchForm() {
 		},
 		errorClass: "error",
 		onfocusout: false,
-
 		tooltip_options: {
 				from: {animation: true,  placement: 'right'},
 				to: { placement: 'right' },
@@ -408,9 +407,12 @@ function initBooking() {
 	var left, opacity, scale; //fieldset properties which we will animate
 	var animating; //flag to prevent quick multi-click glitches
 
+
 	$(".next").click(function(){
 		if(animating) return false;
-		if(! isBookingValidated()) return false;
+
+		initBookingValidation();
+		if(! $("#msform").valid()) return false;
 		animating = true;
 		
 		current_fs = $(this).parent();
@@ -477,6 +479,9 @@ function initBooking() {
 			//this comes from the custom easing plugin
 			easing: 'easeInOutBack'
 		});
+		$(this).parent().find("input").removeClass("error");
+		$(this).parent().find("input").tooltip('hide');
+
 	});
 
 	$(".finish").click(function(){
@@ -800,91 +805,120 @@ function tdClick(element){
 	});
 }
 
-// Validation
-/*function isInvalidForm() {
-	var isInvalid = false;
-	var to = $("#to").val();
-	var from = $("#from").val();
+function initBookingValidation() {
+	$("#msform input[type=text]").focusin(function() {
+		if($(this).hasClass("error"))
+			$(this).removeClass("error");
+   		$(this).tooltip('hide');
+	});
 
-	if (isEmpty(from) || !contains(from) || to == from) {
-		$("#from").addClass("error");
-		isInvalid = true;
-	};
+	jQuery.validator.addMethod("validName", function(value, element) {
+    	return this.optional(element) || /^[a-zA-Z ,.'-]+$/.test(value);
+	}, "Please enter valid name");
 
-	if (isEmpty(to) || !contains(to) || to == from) {
-		$("#to").addClass("error");
-		isInvalid = true;
-	};
-	if (isEmpty($("#date").val())) {
-		$("#date").addClass("error");
-		isInvalid = true;
-	};
+	jQuery.validator.addMethod("optional2", function(value, element) {
+    	return $('#fs-second-passenger').hasClass('hide') || !isEmpty(value);
+	}, "This field is required");
 
-	if ($("#date-return").is(":visible") && isEmpty($("#date-return").val())) {
-		$("#date-return").addClass("error");
-		isInvalid = true;
-	};
+	jQuery.validator.addMethod("validMonth", function(value, element) {
+    	return this.optional(element) || /^(0?[1-9]|1[012])$/.test(value);
+	}, "Please enter two-digit month (MM)");
 
-	return isInvalid;
-}*/
+	jQuery.validator.addMethod("validYear", function(value, element) {
+    	return this.optional(element) || /^[0-9]{2}$/.test(value);
+	}, "Please enter two-digit year (YY)");
 
-function isBookingValidated() {
-	if (! $('#progressbar li:nth-child(2)').hasClass('active')) {
-		return true;
-	};
-	if (! $('#progressbar li:nth-child(3)').hasClass('active')) {
-		ok = true;
-		var patt = new RegExp("^[a-zA-Z ,.'-]+$");
-		if(!patt.test($('#fs-name1').val())){
-			$('#fs-name1').addClass('error');
-			ok = false;
-		}
-		if($('#fs-birth1').val() === "") {
-			$('#fs-birth1').addClass('error');
-			ok = false;
-		}
+	jQuery.validator.addMethod("validCVV", function(value, element) {
+    	return this.optional(element) || /^[0-9]{3,4}$/.test(value);
+	}, "Please enter valid CVV number");
 
-		if (! $('#fs-second-passenger').hasClass('hide')) {
-			if(!patt.test($('#fs-name2').val())){
-				$('#fs-name2').addClass('error');
-				ok = false;
+	jQuery.validator.addMethod("validCC", function(value, element) {
+    	return this.optional(element) || /^[0-9]{13,16}$/.test(value);
+	}, "Please enter valid credit card number");
+
+	$("#msform").validate({
+		rules: {
+			"fs-name1": {
+				required: true,
+				validName: true
+			},
+			"fs-birth1": {
+				required: true
+			},
+			"fs-name2": {
+				optional2: true,
+				validName: true
+			},
+			"fs-birth2": {
+				optional2: true
+			},
+			cname: {
+				required: true,
+				validName: true
+			},
+			mm: {
+				required: true,
+				validMonth: true
+			},
+			yy: {
+				required: true,
+				validYear: true
+			},
+			cc: {
+				required: true,
+				validCC: true
+			},
+			cvv: {
+				required: true,
+				validCVV: true
+			},
+		},
+		messages: {
+			"fs-name1": {
+				required: "Please enter full name",
+				validName: "Please enter valid full name"
+			},
+			"fs-birth1": {
+				required: "Please enter date of birth"
+			},
+			"fs-name2": {
+				optional2: "Please enter full name",
+				validName: "Please enter valid full name"
+			},
+			"fs-birth2": {
+				optional2: "Please enter date of birth",
+			},
+			cname: {
+				required: "Please enter full name",
+				validName: "Please enter valid full name"
+			},
+			mm: {
+				required: "Please enter month"
+			},
+			yy: {
+				required: "Please enter year"
+			},
+			cc: {
+				required: "Please enter credit card number"
+			},
+			cvv: {
+				required: "Please enter cvv number"
 			}
-			if($('#fs-birth2').val() === "") {
-				$('#fs-birth2').addClass('error');
-				ok = false;
-			}		
-		};
 
-		return ok;
-	};
-	if (! $('#progressbar li:nth-child(4)').hasClass('active')) {
-		ok = true;
-		var patt = new RegExp("^[a-zA-Z ,.'-]+$");
-		if(!patt.test($('#cc-name').val())) {
-			$('#cc-name').addClass('error');
-			ok = false;
+		},
+		errorClass: "error",
+		onfocusout: false,
+		onkeyup: false,
+		tooltip_options: {
+				"fs-name1": { placement: 'right' },
+				"fs-birth1": { placement: 'right' },
+				"fs-name2": { placement: 'right' },
+				"fs-birth2": { placement: 'right' },
+				cname: { placement: 'left' },
+				mm: { placement: 'top' },
+				yy: { placement: 'right' },
+				cc: { placement: 'left' },
+				cvv: { placement: 'right' }
 		}
-		patt = new RegExp("^(0?[1-9]|1[012])$");
-		if(!patt.test($('#cc-month').val())) {
-			$('#cc-month').addClass('error');
-			ok = false;
-		}
-		patt = new RegExp("^[0-9]{2}$");
-		if(!patt.test($('#cc-year').val())) {
-			$('#cc-year').addClass('error');
-			ok = false;
-		}
-		if($('#cc').css('color') != "rgb(0, 128, 0)"){
-			$('#cc').addClass('error');
-			ok = false;
-		}
-		patt = new RegExp("^[0-9]{3,4}$")
-		if(!patt.test($('#cc-cvv').val())){
-			$('#cc-cvv').addClass('error');
-			ok = false;
-		}
-
-		return ok;
-	};
-	return true;
-}
+	});
+} 
