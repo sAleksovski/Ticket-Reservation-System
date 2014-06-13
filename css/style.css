@@ -843,9 +843,9 @@ header {
 }
 
 .arrow .img {
-	background-image: url('http://assets.hipmunk.com/static/a79d6c8f327281abba54837345b582ad424e5550/sprites_small.png?h=3e003');
+	background-image: url('../images/arrows.png');
 	background-repeat: no-repeat;
-	background-position: -979px 0px;
+	background-position: 0px -59px;
 	width: 24px;
 	height: 12px;
 	position: absolute;
@@ -881,7 +881,7 @@ header {
 }
 
 .summary-arrow {
-	background-image: url('../images/down-arrow.png');
+	background-image: url('../images/arrows.png');
 	background-repeat: no-repeat;
 	width: 21px;
 	height: 59px;
