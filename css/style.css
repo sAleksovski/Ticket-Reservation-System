@@ -109,14 +109,31 @@ header {
 #map-display {
 	float: right;
 	width: 680px;
-	height: 400px;
+	height: 380px;
 }
 
 #map-canvas {
 	width: 680px;
-	height: 400px;
+	height: 380px;
 	margin: 0px;
 	padding: 0px;
+}
+
+#map-help {
+	color: white;
+	display: block;
+	font-weight: bold;
+	text-align: center;
+	background-color: #5cb85c;
+}
+
+#map-help-close {
+	display: inline-block;
+	position: absolute;
+	cursor: pointer;
+	font-size: 16px;
+	float: right;
+	right: 10px;
 }
 
 /* Flip */
@@ -170,6 +187,9 @@ header {
 
 #flip-card .back {
 	background-color: #B3D1FF;
+	border: 1px solid #d8d8d8;
+	border-bottom-width: 2px;
+	border-radius: 3px;
 	  -webkit-transform: rotateY( 180deg );
 	     -moz-transform: rotateY( 180deg );
 	       -o-transform: rotateY( 180deg );
@@ -236,7 +256,6 @@ header {
 }
 #tabs ul li span:hover {
 	cursor: pointer;
-	cursor: hand;
 }
 
 #tabs-content {
@@ -803,6 +822,23 @@ header {
 #progressbar li.active:before,  #progressbar li.active:after{
 	background: #27AE60;
 	color: white;
+}
+
+.close {
+	background-color: #dd4b39;
+	display: block;
+	height: 20px;
+	width: 30px;
+	position: absolute;
+	right: 0;
+	top: 0;
+	border-radius: 0 0 0 3px;
+	color: white;
+	cursor: pointer;
+}
+
+.close:hover {
+	background: #db2c36;
 }
 
 .price {

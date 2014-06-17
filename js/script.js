@@ -75,6 +75,12 @@ function initialize() {
 			}
 		});
 	});
+
+	$("#map-help-close").click(function(){
+		$('#map-help').hide();
+		$('#map-display').css('height', '400px');
+		$('#map-canvas').css('height', '400px');
+	});
 }
 
 // drawing a line between two markers on map
@@ -491,6 +497,10 @@ function initBooking() {
 	$("#msform-container").click(function(e){
 		if (e.target !== this) return;
 		$(this).addClass('hide');
+	});
+
+	$(".close").click(function(){
+		$("#msform-container").addClass('hide');
 	});
 
 	$("#cc").on('input', function(){
