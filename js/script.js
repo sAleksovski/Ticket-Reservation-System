@@ -34,9 +34,11 @@ function initialize() {
 
 					//Fill #from field
 					if (markerFrom == null) {
+						var upImage = 'images/up.png';
 						markerFrom = new google.maps.Marker({
 							 	position: event.latLng, 
 							map: map,
+							icon: upImage,
 							title: "Click to remove"
 						});
 						$("#from").val(results[1].address_components[results[1].address_components.length - 2].long_name);
@@ -53,9 +55,11 @@ function initialize() {
 
 					// Fill #to field and draw  path
 					else if (markerTo == null) {
+						var downImage = 'images/down.png';
 						markerTo = new google.maps.Marker({
 							 	position: event.latLng, 
 							map: map,
+							icon: downImage,
 							title: "Click to remove"
 						});
 						$("#to").val(results[1].address_components[results[1].address_components.length - 2].long_name);
@@ -93,12 +97,20 @@ function drawPath () {
 			  	if (flightPath != null)
 				  		flightPath.setMap(null);
 
+				var lineSymbol = {
+					path: google.maps.SymbolPath.FORWARD_OPEN_ARROW
+				};
+
 			  	flightPath = new google.maps.Polyline({
 					path: flightPlanCoordinates,
 					geodesic: true,
 					strokeColor: '#FF0000',
 					strokeOpacity: 1.0,
-					strokeWeight: 2
+					strokeWeight: 2,
+					icons: [{
+						icon: lineSymbol,
+						offset: '60%'
+					}]
 				});
 
 				flightPath.setMap(map);
