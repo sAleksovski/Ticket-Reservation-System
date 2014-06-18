@@ -8,7 +8,7 @@ var isInvalid = false;
 
 // handling user click on map and initializing map
 function initialize() {
-	var myCenter = new google.maps.LatLng(39.828127,-98.579404);
+	var myCenter = new google.maps.LatLng(43.828127,-110.579404);
 	var mapOptions = {
 		zoom: 3,
 		//disableDefaultUI: true,
