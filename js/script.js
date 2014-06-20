@@ -168,11 +168,11 @@ function initSearchForm() {
 			myLatlng = new google.maps.LatLng(ui.item.lat,ui.item.lon);
 			
 			if (markerFrom != null) {markerFrom.setMap(null);	};
-			var image = "start.png";
+			var upImage = 'images/up.png';
 			markerFrom = new google.maps.Marker({
 				position: myLatlng,
 				map: map,
-				//icon: image,
+				icon: upImage,
 				title: "Click to remove"
 			});
 			google.maps.event.addListener(markerFrom, 'click', function() {
@@ -205,11 +205,11 @@ function initSearchForm() {
 			myLatlng = new google.maps.LatLng(ui.item.lat,ui.item.lon);
 			
 			if (markerTo != null) {markerTo.setMap(null);	};
-			var image = "finish.png";
+			var downImage = 'images/down.png';
 			markerTo = new google.maps.Marker({
 				position: myLatlng,
 				map: map,
-				//icon: image,
+				icon: downImage,
 				title: "Click to remove"
 			});
 

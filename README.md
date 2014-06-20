@@ -11,5 +11,5 @@ TO-DO List
 > - [x] Confirm dialog/page
 > - [ ] Review user interface 
 > - [ ] Review visual appearance
-> - [ ] More visual hints(Remove marker, Sort results, Open map)
+> - [x] More visual hints(Remove marker, Sort results, Open map)
 
