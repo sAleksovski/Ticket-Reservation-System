@@ -257,6 +257,10 @@ function initSearchForm() {
 		};
 	});
 
+	$(".ad-card-text-red").click(function() {
+		insertDestination("Hawaii");
+	});
+
 	$("input[type=text]").focusin(function() {
 		if($(this).hasClass("error"))
 			$(this).removeClass("error");
@@ -382,15 +386,7 @@ function initCityGuideShow(){
 	$(".city-block").click(function() {
 		var string = $(this).find(".state-name").html();
 		string = string.substring(0, string.length - 5);
-		
-		// trigger autocomplete event
-		var keyEvent = $.Event("keydown");
-		keyEvent.keyCode = $.ui.keyCode.DOWN;  // event for pressing "down" key
-		$("#to").val(string);
-		$("#to").trigger(keyEvent);  // Press "down" key twice to select first Item
-		$("#to").trigger(keyEvent);
-		keyEvent.keyCode = $.ui.keyCode.ENTER; // event for pressing the "enter" key
-		$("#to").trigger(keyEvent); 
+		insertDestination(string);
 	});
 }
 
@@ -759,6 +755,17 @@ function calculateDurationMinutes(time1, time2) {
 	return 60*h + m;
 }
 
+function insertDestination(string) {
+	// trigger autocomplete event
+	var keyEvent = $.Event("keydown");
+	keyEvent.keyCode = $.ui.keyCode.DOWN;  // event for pressing "down" key
+	$("#to").val(string);
+	$("#to").trigger(keyEvent);  // Press "down" key twice to select first Item
+	$("#to").trigger(keyEvent);
+	keyEvent.keyCode = $.ui.keyCode.ENTER; // event for pressing the "enter" key
+	$("#to").trigger(keyEvent); 
+}
+
 function tdClick(element){
 	$( '#msform-container' ).load( "ajax/booking-form.html", function() {
 
@@ -820,7 +827,7 @@ function tdClick(element){
 		$('#fs-final-time-2').html($('#fs-return-date').html() + ti[1]);
 
 		$('#fs-final-price').html(p);
-		$('.success-num').html(Math.floor((Math.random() * 100000) + 10000))
+		$('.success-num').html("#" + Math.floor((Math.random() * 100000) + 10000))
 
 		$('fieldset input[type=text]').val("");
 		$("#msform-container").removeClass('hide');
